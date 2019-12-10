@@ -1,0 +1,22 @@
+<div class="page-container d-flex flex-column">
+    <div class="page-header d-flex flex-row justify-content-around align-items-center">
+        <div class="create-field-left">
+            <angel-label content="Page" cls="lg-title"></angel-label>
+            <angel-label content="Select a page to edit or create a new page" cls="desc-mid"></angel-label>
+        </div>
+        <div class="create-field-right p-3">
+            <img class="sml-icon" src="./../../assets/images/add.png">
+            <span>Create New Page</span>
+        </div>
+    </div>
+    <div class="page-body p-4">
+        <div class="ready-widget mx-5">
+            <angel-label content="ody-bw-qc-100" cls="value text-center my-2"></angel-label>
+            <div *ngFor="let item of readyWidgets" class="px-4">
+                <angel-dynamic-widgets-engine [item]="item"></angel-dynamic-widgets-engine>
+            </div>
+        </div>
+
+    </div>
+
+</div>

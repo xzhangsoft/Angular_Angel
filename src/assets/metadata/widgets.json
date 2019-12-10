@@ -1,0 +1,64 @@
+{
+    "widgets": [{
+            "widget-ref": "WidgetsComponent",
+            "fields": {
+                "title": "Available Quick cash from your credit card. ",
+                "titleCls": "title",
+                "value": "SGD 7687",
+                "valueCls": "value",
+                "progressbar": true,
+                "progressCls": "pt-2"
+            }
+        },
+        {
+            "widget-ref": "WidgetsComponent",
+            "fields": {
+                "cardImg": true,
+                "title": "Rewards Card  •••• 2187",
+                "titleCls": "title",
+                "value": "SGD 41,724.40 ",
+                "valueCls": "value"
+            }
+        },
+        {
+            "widget-ref": "WidgetsComponent",
+            "fields": {
+                "title": "Time Loan  •••• 7891 ",
+                "titleCls": "title",
+                "value": "SGD 12,345.00 ",
+                "valueCls": "value"
+            }
+        },
+        {
+            "widget-ref": "WidgetsComponent",
+            "fields": {
+                "title": "Cash Trading  •••• 9174 ",
+                "titleCls": "title",
+                "value": "SGD 951,878.16 ",
+                "valueCls": "value"
+            }
+        },
+        {
+            "widget-ref": "WidgetsComponent",
+            "fields": {
+                "showArrow": false,
+                "showRightBtn": true,
+                "title": "Global Wallet ",
+                "titleCls": "title",
+                "value": "Spend overseas like a local with your debit card ",
+                "valueCls": "value-sm"
+            }
+        },
+        {
+            "widget-ref": "WidgetsComponent",
+            "fields": {
+                "footer": true,
+                "icons": [
+                    "./../assets/images/gift.png",
+                    "./../assets/images/wealth.png",
+                    "./../assets/images/more.png"
+                ]
+            }
+        }
+    ]
+}

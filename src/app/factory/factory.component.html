@@ -1,0 +1,68 @@
+<div class="row">
+    <div *ngIf="!showmenu" class="col-lg-4 col-md-5 col-sm-12">
+        <div class="bd-sidebar p-4">
+            <div class="py-3" cdkDropList #readyList="cdkDropList" [cdkDropListData]="widgetsList"
+                [cdkDropListConnectedTo]="[editList]" (cdkDropListDropped)="drop($event)">
+                <div *ngFor="let widget of widgetsList" cdkDrag>
+                    <angel-dynamic-widgets-engine [item]="widget"></angel-dynamic-widgets-engine>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div>
+                  <img class="large-icon" src="./../assets/images/expandmenu.png" (click)="showmenu = !showmenu">
+                </div> -->
+
+    <div class="col-lg-8 col-md-7 col-sm-12">
+        <div class="container-mobile">
+            <div class="mobile-header d-flex flex-row justify-content-between align-items-center px-4 py-2">
+                <h2 class="font-weight-bold text-center">Our Device</h2>
+                <div class="text-right d-inline">
+                    <img class="mid-icon mr-2" src="./../assets/images/sign.png">
+                    <img class="mid-icon" src="./../assets/images/export.png">
+                </div>
+            </div>
+            <div class="mobile-body">
+                <!-- {{editingWidgets | json}} -->
+                <div class="px-4 pb-4" cdkDropList #editList="cdkDropList" [cdkDropListData]="editingWidgets"
+                    [cdkDropListConnectedTo]="[readyList]" (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let item of editingWidgets" cdkDrag (dblclick)="editEvent($event)">
+                        <angel-dynamic-widgets-engine [item]="item"></angel-dynamic-widgets-engine>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="editEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content p-4 border-radius-10">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalCenterTitle"><b>Edit Your Event</b></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body px-4">
+                        <form>
+                            <div class="form-group input-group-lg">
+                                <h3 for="target-page" class="col-form-label">target-page:</h3>
+                                <input type="text" class="form-control" aria-describedby="inputGroup-sizing-lg"
+                                    id="target-page" [(ngModel)]="page" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="form-group input-group-lg">
+                                <h3 for="target-page-theme" class="col-form-label">target-page-theme</h3>
+                                <input class="form-control" aria-describedby="inputGroup-sizing-lg"
+                                    id="target-page-theme" [(ngModel)]="theme" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg" (click)="saveEvent()"><b>Save</b></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
