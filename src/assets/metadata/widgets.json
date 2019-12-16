@@ -1,7 +1,17 @@
 {
     "widgets": [{
-            "widget-ref": "WidgetsComponent",
+            "id":"ody-nav",
+            "widgetRef": "WidgetsComponent",
             "fields": {
+                "name": "mxnx xhxoxfxlxcxa nxnxox ",
+                "profile": true
+            }
+        }, {
+            "id":"ody-quickcash",
+            "widgetRef": "WidgetsComponent",
+            "fields": {
+                "common": true,
+                "showRightBtn": "true",
                 "title": "Available Quick cash from your credit card. ",
                 "titleCls": "title",
                 "value": "SGD 7687",
@@ -11,8 +21,11 @@
             }
         },
         {
-            "widget-ref": "WidgetsComponent",
+            "id":"ody-credit-card",
+            "widgetRef": "WidgetsComponent",
             "fields": {
+                "common": true,
+                "showRightBtn": "true",
                 "cardImg": true,
                 "title": "Rewards Card  •••• 2187",
                 "titleCls": "title",
@@ -21,8 +34,11 @@
             }
         },
         {
-            "widget-ref": "WidgetsComponent",
+            "id":"ody-loan",
+            "widgetRef": "WidgetsComponent",
             "fields": {
+                "common": true,
+                "showRightBtn": "true",
                 "title": "Time Loan  •••• 7891 ",
                 "titleCls": "title",
                 "value": "SGD 12,345.00 ",
@@ -30,8 +46,11 @@
             }
         },
         {
-            "widget-ref": "WidgetsComponent",
+            "id":"ody-card",
+            "widgetRef": "WidgetsComponent",
             "fields": {
+                "common": true,
+                "showRightBtn": "true",
                 "title": "Cash Trading  •••• 9174 ",
                 "titleCls": "title",
                 "value": "SGD 951,878.16 ",
@@ -39,10 +58,11 @@
             }
         },
         {
-            "widget-ref": "WidgetsComponent",
+            "id":"ody-global-wallet",
+            "widgetRef": "WidgetsComponent",
             "fields": {
-                "showArrow": false,
-                "showRightBtn": true,
+                "common": true,
+                "showRightBtn": "true",
                 "title": "Global Wallet ",
                 "titleCls": "title",
                 "value": "Spend overseas like a local with your debit card ",
@@ -50,7 +70,8 @@
             }
         },
         {
-            "widget-ref": "WidgetsComponent",
+            "id":"ody-footer",
+            "widgetRef": "WidgetsComponent",
             "fields": {
                 "footer": true,
                 "icons": [

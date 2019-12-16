@@ -1,20 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: "angel-widgets",
-  templateUrl: "./widgets.component.html",
-  styleUrls: ["./widgets.component.scss"]
+  selector: 'angel-widgets',
+  templateUrl: './widgets.component.html',
+  styleUrls: ['./widgets.component.scss']
 })
 export class WidgetsComponent implements OnInit {
-  @Input() widgetCls: string = "row";
+  @Input() widgetCls: string = 'row';
   @Input() item: any;
 
+  @Input() header: any;
+  @Input() common: any;
   @Input() title: any;
   @Input() value: any;
   @Input() progressbar: boolean = false;
   @Input() cardImg: boolean = false;
   @Input() showArrow: boolean = true;
-  @Input() showRightBtn: boolean = false;
+  @Input() showRightBtn = 'false';
 
   @Input() titleCls: string;
   @Input() valueCls: string;
@@ -28,7 +30,13 @@ export class WidgetsComponent implements OnInit {
 
   arrowClicked() {
     this.events.emit({
-      type: "arrowClicked"
+      type: 'arrowClicked'
+    });
+  }
+
+  editArrowClick() {
+    this.events.emit({
+      type: 'editEvent'
     });
   }
 }

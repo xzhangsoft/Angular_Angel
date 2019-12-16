@@ -1,0 +1,65 @@
+{
+    "save": "Save",
+    "cancel": "Cancel",
+    "editEventModal": {
+        "title": "Edit Your Event",
+        "type":"editEvent",
+        "isForm": true,
+        "inputGroup": [
+            {
+                "key":"target-page:",
+                "value":""
+            }
+        ],
+        "confirm":"Save"
+    },
+    "savePageConfigModal": {
+        "title": "Save Your Page",
+        "type":"savePage",
+        "isForm": true,
+        "inputGroup": [
+            {
+                "key":"page-id:",
+                "value":"aaa"
+            }
+        ],
+        "confirm":"Save"
+    },
+    "warnSamePageModal": {
+        "title": "Exist Same Page! please change page id",
+        "type": "warn",
+        "isForm": true,
+        "inputGroup": [
+            {
+                "key": "page-id:",
+                "value": ""
+            }
+        ],
+        "confirm":"Save"
+    },
+    "notifyCorrectResultModal": {
+        "title": "Success!",
+        "type": "notify",
+        "isForm": false,
+        "confirm": "Ok"
+    },
+    "notifyFailedResultModal": {
+        "title": "Failed!",
+        "type": "notify",
+        "isForm": false,
+        "confirm": "Ok"
+    },
+    "editConfigModal": {
+        "title": "Edit Your Widgets Config",
+        "type": "editConfig",
+        "isForm": true,
+        "inputGroup": [],
+        "confirm": "Save"
+    },
+    "confirmRemoveModal": {
+        "title": "Sure To Remove All Page ?",
+        "type": "editConfig",
+        "confirm": "Yes",
+        "cancel": "No"
+    }
+}
