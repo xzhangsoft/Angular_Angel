@@ -5,7 +5,7 @@ import {
   copyArrayItem
 } from '@angular/cdk/drag-drop';
 import { AppService } from './../app.service';
-import { IAngel, IAngelPage, IAngelWidget, IAngelEvent } from './../interface';
+import { IAngelPage, IAngelWidget, IAngelEvent } from './../interface';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 declare var $: any;
@@ -29,11 +29,10 @@ export class FactoryComponent implements OnInit {
   editPageId = '';
   editWidgetId = '';
 
-  constructor(private appService: AppService,
-    private router: ActivatedRoute) {
+  constructor(private appService: AppService, private router: ActivatedRoute) {
     setTimeout(() => {
       this.showSpinner = false;
-    }, 500);
+    }, 300);
   }
 
   ngOnInit() {
@@ -60,7 +59,8 @@ export class FactoryComponent implements OnInit {
     this.editingWidgets = [];
   }
 
-  engineEvents(event: any, item: IAngelWidget = { id: '', widgetRef: '', fields: '' }) {
+  engineEvents(event: {type: string, item: IAngelWidget}) {
+    const item = event.item;
     switch (event.type) {
       case 'saveMetadata':
         this.saveEventCheck();
@@ -90,6 +90,7 @@ export class FactoryComponent implements OnInit {
         }
         const newPageId = val[0].inputVal;
         this.filterConfig(newPageId);
+        $('#editEvent').modal('hide');
         break;
       case 'editEvent':
         this.updateEvent(val);
@@ -185,7 +186,7 @@ export class FactoryComponent implements OnInit {
       this.modalContent = this.content.warnEventModal;
       return;
     }
-    let currentEventConfigByIdcurrentEventConfig: IAngelEvent[] = this.appService.getEventConfig();
+    const currentEventConfigByIdcurrentEventConfig: IAngelEvent[] = this.appService.getEventConfig();
     if (currentEventConfigByIdcurrentEventConfig.length !== 0) {
       const eventConfig: IAngelEvent = {};
       eventConfig.widgetId = this.editWidgetId;
@@ -203,7 +204,7 @@ export class FactoryComponent implements OnInit {
       eventConfig.targetPage = targetPageId;
       currentEventConfigByIdcurrentEventConfig.push(eventConfig);
     }
-
+    this.modalContent = this.content.notifyCorrectResultModal;
     this.appService.updateEventConfig(currentEventConfigByIdcurrentEventConfig);
   }
 

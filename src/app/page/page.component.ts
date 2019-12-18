@@ -25,7 +25,7 @@ export class PageComponent implements OnInit {
     this.appService.getContent().subscribe(data => {
       this.content = data;
      });
-    this.readyPages = _.get(this.appService.getPageMetadata(), 'angel');
+    this.readyPages = this.appService.getPageMetadata();
     if (this.readyPages && this.readyPages.length > 0) {
       this.showEmpty = false;
     }

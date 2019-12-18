@@ -30,7 +30,8 @@ export class WidgetsComponent implements OnInit {
 
   arrowClick() {
     this.events.emit({
-      type: 'arrowClicked'
+      type: 'arrowClicked',
+      item: this.item
     });
   }
 

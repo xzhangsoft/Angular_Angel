@@ -19,7 +19,7 @@ export class AppService {
 
   getPageMetadata() {
     const localStoragePageConfig = localStorage.getItem('pageMetadata');
-    return localStoragePageConfig ? JSON.parse(localStoragePageConfig) : [];
+    return localStoragePageConfig ? _.get(JSON.parse(localStoragePageConfig), 'angel') : [];
   }
 
   updatePageMetadata(pageConfig: IAngelPage[]): boolean {

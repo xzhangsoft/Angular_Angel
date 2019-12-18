@@ -1,7 +1,3 @@
-export interface IAngel {
-    pageMetadata: IAngelPage;
-}
-
 export interface IAngelPage {
     id?: string;
     widgets?: IAngelWidget[];

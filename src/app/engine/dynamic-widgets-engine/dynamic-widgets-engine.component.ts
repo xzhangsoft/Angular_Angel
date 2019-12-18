@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { WidgetsComponent } from 'src/app/widgets/widgets.component';
 import { DywidgetsDirective } from 'src/app/dywidgets.directive';
+import { IAngelWidget } from 'src/app/interface';
 declare var $: any;
 
 @Component({
@@ -44,18 +45,19 @@ export class DynamicWidgetsEngineComponent implements OnInit {
 
   addSubscribe(componentRef) {
     componentRef.events.subscribe(data => {
+      const item: IAngelWidget = data.item;
       switch (data.type) {
         case 'saveConfig':
-          this.saveConfig();
+          this.saveConfig(item);
           break;
         case 'arrowClicked':
-          this.createNextPage();
+          this.createNextPage(item);
           break;
         case 'editEvent':
-          this.editEvent();
+          this.editEvent(item);
           break;
         case 'editConfig':
-          this.editConfig();
+          this.editConfig(item);
       }
     });
   }
@@ -70,23 +72,31 @@ export class DynamicWidgetsEngineComponent implements OnInit {
     }
   }
 
-  saveConfig() {
+  saveConfig(item: IAngelWidget) {
     this.engineEvents.emit({
-      type: 'openModal'
+      type: 'openModal',
+      item
     });
   }
 
-  editEvent() {
+  editEvent(item: IAngelWidget) {
     this.engineEvents.emit({
-      type: 'editEvent'
+      type: 'editEvent',
+      item
     });
   }
 
-  editConfig() {
+  editConfig(item: IAngelWidget) {
     this.engineEvents.emit({
-      type: 'editConfig'
+      type: 'editConfig',
+      item
     });
   }
 
-  createNextPage() {}
+  createNextPage(item: IAngelWidget) {
+    this.engineEvents.emit({
+      type: 'goNext',
+      item
+    });
+  }
 }
