@@ -28,15 +28,23 @@ export class WidgetsComponent implements OnInit {
 
   ngOnInit() {}
 
-  arrowClicked() {
+  arrowClick() {
     this.events.emit({
       type: 'arrowClicked'
     });
   }
 
+  editValue() {
+    this.events.emit({
+      type: 'editConfig',
+      item: this.item
+    });
+  }
+
   editArrowClick() {
     this.events.emit({
-      type: 'editEvent'
+      type: 'editEvent',
+      item: this.item
     });
   }
 }

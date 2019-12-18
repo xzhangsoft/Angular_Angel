@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IAngelWidget } from '../interface';
 
@@ -10,6 +10,8 @@ import { IAngelWidget } from '../interface';
 export class LiveComponent implements OnInit{
   showSpinner = true;
   editingWidgets: IAngelWidget[] = [];
+  @Input() zindex_init = 10;
+  zindex_add = 10;
 
   constructor(private router: ActivatedRoute) {
     setTimeout(() => {
@@ -27,5 +29,12 @@ export class LiveComponent implements OnInit{
         }
       }
     );
+  }
+
+  getIndex() {
+    this.zindex_init += this.zindex_add;
+    const cls = {
+      'z-index': this.zindex_init
+    }
   }
 }

@@ -29,7 +29,7 @@
             <div class="mobile-body">
                 <div class="px-4 pb-4 dropList" cdkDropList #editList="cdkDropList" [cdkDropListData]="editingWidgets"
                     [cdkDropListConnectedTo]="[readyList]" (cdkDropListDropped)="drop($event)">
-                    <div *ngFor="let item of editingWidgets" cdkDrag (dblclick)="engineEvents('editConfig', item)">
+                    <div *ngFor="let item of editingWidgets" cdkDrag>
                         <angel-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event, item)">
                         </angel-dynamic-widgets-engine>
                     </div>

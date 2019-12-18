@@ -6,12 +6,12 @@
 <div *ngIf="common" class="widget-container text-success p-4 mt-4 d-flex flex-row align-items-center">
    <div *ngIf="cardImg" class="credit-cards mr-4 flex-thin"></div>
    <div class="d-flex flex-row justify-content-between align-items-center flex-fat">
-      <div>
+      <div (dblclick)="editValue()">
          <angel-label *ngIf="title" [content]="title" [cls]="titleCls"></angel-label>
          <angel-label *ngIf="value" [content]="value" [cls]="valueCls"></angel-label>
          <angel-progress-bar *ngIf="progressbar" [cls]="progressCls"></angel-progress-bar>
       </div>
-      <div *ngIf="showRightBtn === 'true'" class="arrow" (dblclick)="editArrowClick()" (click)="arrowClick()">></div>
+      <div *ngIf="showRightBtn === 'true'" class="arrow ml-4" (dblclick)="editArrowClick()" (click)="arrowClick()">></div>
    </div>
 </div>
 <div *ngIf="footer" class="mobile-footer d-flex flex-row justify-content-between align-items-center">

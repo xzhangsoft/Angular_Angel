@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IAngelPage, IAngelWidget, IAngelEvent } from './interface';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AppService {
 
   getPageMetadata() {
     const localStoragePageConfig = localStorage.getItem('pageMetadata');
-    return localStoragePageConfig ? JSON.parse(localStoragePageConfig) : '';
+    return localStoragePageConfig ? JSON.parse(localStoragePageConfig) : [];
   }
 
   updatePageMetadata(pageConfig: IAngelPage[]): boolean {
@@ -48,14 +49,14 @@ export class AppService {
   }
 
   getEventConfig(): IAngelEvent[] {
-    return JSON.parse(localStorage.getItem('eventMetadata'));
+    return localStorage.getItem('eventMetadata') ? _.get(JSON.parse(localStorage.getItem('eventMetadata')), 'angel'): [];
   }
 
   getEventConfigById(id: string): IAngelEvent {
     const localStorageEventConfig = JSON.parse(localStorage.getItem('eventMetadata'));
     if (localStorageEventConfig.length !== 0) {
       localStorageEventConfig.find((data: IAngelEvent) => {
-        if (data.currentPageId === id) {
+        if (data.widgetId === id) {
           return data;
         } else {
           return null;

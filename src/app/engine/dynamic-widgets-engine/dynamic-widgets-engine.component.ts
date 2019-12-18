@@ -38,6 +38,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
 
     const componentRef: any = targetDOM.createComponent(factory);
     this.addSubscribe(componentRef.instance);
+    componentRef.instance.item = item;
     this.assignProperty(componentRef.instance, item.fields);
   }
 
@@ -53,6 +54,8 @@ export class DynamicWidgetsEngineComponent implements OnInit {
         case 'editEvent':
           this.editEvent();
           break;
+        case 'editConfig':
+          this.editConfig();
       }
     });
   }
@@ -76,6 +79,12 @@ export class DynamicWidgetsEngineComponent implements OnInit {
   editEvent() {
     this.engineEvents.emit({
       type: 'editEvent'
+    });
+  }
+
+  editConfig() {
+    this.engineEvents.emit({
+      type: 'editConfig'
     });
   }
 

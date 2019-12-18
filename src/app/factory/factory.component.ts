@@ -27,13 +27,14 @@ export class FactoryComponent implements OnInit {
   inputVal: string;
   editWidetId: string;
   editPageId = '';
+  editWidgetId = '';
 
   constructor(private appService: AppService,
-              private router: ActivatedRoute) {
-                setTimeout(() => {
-                  this.showSpinner = false;
-                }, 500);
-              }
+    private router: ActivatedRoute) {
+    setTimeout(() => {
+      this.showSpinner = false;
+    }, 500);
+  }
 
   ngOnInit() {
     this.router.queryParams.subscribe(
@@ -52,29 +53,30 @@ export class FactoryComponent implements OnInit {
 
     this.appService.getContent().subscribe(data => {
       this.content = data;
-     });
+    });
   }
 
   removeWidgets() {
     this.editingWidgets = [];
   }
 
-  engineEvents(type: string, item: IAngelWidget = {id: '', widgetRef : '', fields : ''}) {
-    switch (type) {
+  engineEvents(event: any, item: IAngelWidget = { id: '', widgetRef: '', fields: '' }) {
+    switch (event.type) {
       case 'saveMetadata':
-          this.saveEventCheck();
-          break;
+        this.saveEventCheck();
+        break;
       case 'editConfig':
         this.modalContent = this.convertConfig(item);
         break;
       case 'editEvent':
+        this.editWidgetId = item.id;
         this.modalContent = this.content.editEventModal;
         break;
     }
     $('#editEvent').modal('show');
   }
 
-  modalConfirm(modalEvent: {type, val}) {
+  modalConfirm(modalEvent: { type, val }) {
     const confirmType = modalEvent.type;
     const val = modalEvent.val;
     switch (confirmType) {
@@ -99,7 +101,7 @@ export class FactoryComponent implements OnInit {
   }
 
   saveEventCheck() {
-    const metadata: IAngelPage[] = this.appService.getPageMetadata() ? this.appService.getPageMetadata().angel : [];
+    const metadata: IAngelPage[] = this.appService.getPageMetadata();
     if (metadata.some(data => data.id === this.editPageId)) {
       const updateMeta = metadata.map((data: IAngelPage) => {
         if (data.id === this.editPageId) {
@@ -114,7 +116,7 @@ export class FactoryComponent implements OnInit {
     }
   }
 
-  convertConfig(item: IAngelWidget = {id: '', widgetRef : '', fields : ''}): Array<any> {
+  convertConfig(item: IAngelWidget = { id: '', widgetRef: '', fields: '' }): Array<any> {
     this.editWidetId = item.id;
     const field = item.fields;
     const editConfigModal = _.cloneDeep(this.content.editConfigModal);
@@ -137,7 +139,7 @@ export class FactoryComponent implements OnInit {
     const editWidgetId = this.editWidetId;
     let cloneEditWidgets = _.cloneDeep(this.editingWidgets);
     cloneEditWidgets = cloneEditWidgets.map((data) => {
-      if (data.id ===  editWidgetId) {
+      if (data.id === editWidgetId) {
         Object.keys(data.fields).map((fieldkey) => {
           inputGroup.forEach((inputData) => {
             Object.keys(inputData).map((inputkey) => {
@@ -155,7 +157,7 @@ export class FactoryComponent implements OnInit {
   }
 
   filterConfig(newPageId: string) {
-    const metadata: IAngelPage[] = this.appService.getPageMetadata() ? this.appService.getPageMetadata().angel : [];
+    const metadata: IAngelPage[] = this.appService.getPageMetadata();
     if (metadata && metadata.some(data => data.id === newPageId)) {
       this.modalContent = this.content.warnSamePageModal;
     } else {
@@ -177,15 +179,32 @@ export class FactoryComponent implements OnInit {
     return this.appService.updatePageMetadata(pageMetadata);
   }
 
-  updateEvent(val: IAngelEvent) {
-    const currentPageId = val.currentPageId;
-    const targetPageId = val.currentPageId;
-    const currentEventConfigByIdcurrentEventConfig = this.appService.getEventConfig();
-    currentEventConfigByIdcurrentEventConfig.map((data) => {
-      if (data.currentPageId === currentPageId) {
-        // TODO...
-      }
-    });
+  updateEvent(val: [{ key: '', value: '', inputVal: '' }]) {
+    const targetPageId = val[0].inputVal;
+    if (!targetPageId) {
+      this.modalContent = this.content.warnEventModal;
+      return;
+    }
+    let currentEventConfigByIdcurrentEventConfig: IAngelEvent[] = this.appService.getEventConfig();
+    if (currentEventConfigByIdcurrentEventConfig.length !== 0) {
+      const eventConfig: IAngelEvent = {};
+      eventConfig.widgetId = this.editWidgetId;
+      eventConfig.targetPage = targetPageId;
+      currentEventConfigByIdcurrentEventConfig.some(data => {
+        if (this.editWidgetId === data.widgetId) {
+          data.widgetId = this.editWidgetId;
+          data.targetPage = targetPageId;
+          return true;
+        }
+      }) ? '' : currentEventConfigByIdcurrentEventConfig.push(eventConfig);
+    } else {
+      const eventConfig: IAngelEvent = {};
+      eventConfig.widgetId = this.editWidgetId;
+      eventConfig.targetPage = targetPageId;
+      currentEventConfigByIdcurrentEventConfig.push(eventConfig);
+    }
+
+    this.appService.updateEventConfig(currentEventConfigByIdcurrentEventConfig);
   }
 
   drop(event: CdkDragDrop<string[]>) {

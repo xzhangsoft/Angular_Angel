@@ -15,7 +15,7 @@ export interface IAngelWidget {
 }
 
 export interface IAngelEvent {
-    currentPageId: string;
-    targetPage: string;
+    widgetId?: string;
+    targetPage?: string;
 }
 
