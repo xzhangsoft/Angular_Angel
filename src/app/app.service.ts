@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IAngelPage, IAngelWidget, IAngelEvent } from './interface';
+import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient) { }
+  content: any = {};
   getData(url: string) {
     return this.http.get<any>(url);
   }
 
   getContent(url = '/assets/static/content.json') {
-    return this.http.get<any>(url);
+    // 此处url应该单独建立一个constant文件来存
+    // 此方法被多次调用了，而且每次返回的数据其实是一样的，应该做缓存
+    if (this.content) {
+      return of(this.content);
+    }
+    return this.http.get<any>(url).pipe(tap(content => this.content = content));
   }
 
   getPageMetadata() {
@@ -49,7 +56,7 @@ export class AppService {
   }
 
   getEventConfig(): IAngelEvent[] {
-    return localStorage.getItem('eventMetadata') ? _.get(JSON.parse(localStorage.getItem('eventMetadata')), 'angel'): [];
+    return localStorage.getItem('eventMetadata') ? _.get(JSON.parse(localStorage.getItem('eventMetadata')), 'angel') : [];
   }
 
   getEventConfigById(id: string): IAngelEvent {

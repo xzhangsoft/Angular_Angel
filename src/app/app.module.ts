@@ -20,7 +20,7 @@ import { LiveComponent } from './live/live.component';
 import { FactoryComponent } from './factory/factory.component';
 import { FooterComponent } from './branding/footer/footer.component';
 import { ModalComponent } from './uiux/modal/modal.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +44,8 @@ import { ModalComponent } from './uiux/modal/modal.component';
     AppRoutingModule,
     DragDropModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
