@@ -8,26 +8,48 @@ import { AppService } from './../app.service';
 import { IAngelPage, IAngelWidget, IAngelEvent } from './../interface';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
+import {
+  trigger,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 declare var $: any;
 
 @Component({
   selector: 'app-factory',
   templateUrl: './factory.component.html',
-  styleUrls: ['./factory.component.scss']
+  styleUrls: ['./factory.component.scss'],
+  animations: [
+    trigger('toggleMenu', [
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(300, style({ transform: 'translateX(0)' }))
+      ]),
+      // 动画时间可自行调整
+      transition('* => void', [
+        animate(300, style({ transform: 'translateX(-100%)' }))
+      ])
+    ])
+  ]
 })
 export class FactoryComponent implements OnInit {
   @Output() factoryEvents = new EventEmitter<any>();
   editingWidgets: IAngelWidget[] = [];
 
   showSpinner = true;
-  basicWidgets: string[];
+  private basicWidgets: string[];
   widgetsList: string[];
   content: any;
   modalContent: any;
-  inputVal: string;
-  editWidetId: string;
-  editPageId = '';
-  editWidgetId = '';
+  private inputVal: string; // 没用到貌似
+  private editWidetId: string;
+  private editPageId = '';
+  private editWidgetId = '';
+  showmenu: boolean = true;
+  // 尽量不要用相对路径，这样前面的/assets/images可以封装到constant里，不然你无法确定component在哪一级，不知道要加几个点
+  // menuToggleImg = './../assets/images/expandmenu.png';
+  menuToggleImg = '/assets/images/expandmenu.png';
 
   constructor(private appService: AppService, private router: ActivatedRoute) {
     setTimeout(() => {
@@ -59,7 +81,13 @@ export class FactoryComponent implements OnInit {
     this.editingWidgets = [];
   }
 
-  engineEvents(event: {type: string, item: IAngelWidget}) {
+  toogleMenu() {
+    this.showmenu = !this.showmenu;
+    // 再找一个反向箭头，显示的不一样
+    this.showmenu ? this.menuToggleImg = './../assets/images/expandmenu.png' : this.menuToggleImg = './../assets/images/expandmenu.png';
+  }
+
+  engineEvents(event: { type: string, item: IAngelWidget }) {
     const item = event.item;
     switch (event.type) {
       case 'saveMetadata':

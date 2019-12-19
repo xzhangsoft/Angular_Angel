@@ -13,6 +13,7 @@
     width: 375px;
     height: 600px;
     box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
+    // 此处margin依据是什么，这个margintop感觉不科学
     margin: calc((100vh - 64rem) * .5) 10rem;
     border-radius: 10px;
 
