@@ -9,8 +9,11 @@ import {
   EventEmitter
 } from '@angular/core';
 import { WidgetsComponent } from 'src/app/widgets/widgets.component';
+import { FlowContainerComponent } from 'src/app/flow-container/flow-container.component';
 import { DywidgetsDirective } from 'src/app/dywidgets.directive';
-import { IAngelWidget } from 'src/app/interface';
+import { IAngelWidget, IAngelEvent, IAngelPage } from 'src/app/interface';
+import { AppService } from 'src/app/app.service';
+import * as _ from 'lodash';
 declare var $: any;
 
 @Component({
@@ -19,28 +22,51 @@ declare var $: any;
   styleUrls: ['./dynamic-widgets-engine.component.scss']
 })
 export class DynamicWidgetsEngineComponent implements OnInit {
+  zindexInit = 10;
+  zindexAdd = 10;
+
   @Output() engineEvents = new EventEmitter<any>();
   @Input() item: any;
   @ViewChild(DywidgetsDirective, { static: true })
   dywidgetsDirective: DywidgetsDirective;
 
-  constructor(private resolver: ComponentFactoryResolver) {}
+  constructor(private resolver: ComponentFactoryResolver, private appService: AppService) { }
 
   ngOnInit() {
     this.injectBasicComponent(this.item);
   }
 
-  injectBasicComponent(item: any) {
-    const basicComponentRef = WidgetsComponent;
-    const factory = this.resolver.resolveComponentFactory(basicComponentRef);
+  injectBasicComponent(item: IAngelWidget) {
+    this.dynamicConf(WidgetsComponent, item, item.fields);
+  }
+
+  createNextPage(item: IAngelPage) {
+    const flowField = {
+      zindex: this.zindexInit,
+      widgetsConfigs: item.widgets
+    }
+    this.dynamicConf(FlowContainerComponent, item, flowField);
+  }
+
+  dynamicConf(widgetConf: any, item: any, fields: any) {
+    const factory = this.resolver.resolveComponentFactory(widgetConf);
     const targetDOM: ViewContainerRef = this.dywidgetsDirective
       .viewContainerRef;
-    targetDOM.clear();
 
     const componentRef: any = targetDOM.createComponent(factory);
     this.addSubscribe(componentRef.instance);
     componentRef.instance.item = item;
-    this.assignProperty(componentRef.instance, item.fields);
+    this.assignProperty(componentRef.instance, fields);
+  }
+
+  getPageFromWidgetId(item: IAngelWidget) {
+    const widgetId = item.id;
+    const targetPage: string = _.get(this.appService.getEventConfigById(widgetId), 'targetPage');
+    if (!targetPage) {
+      return;
+    }
+    const pageConfig = this.appService.getPageConfigById(targetPage);
+    this.createNextPage(pageConfig);
   }
 
   addSubscribe(componentRef) {
@@ -51,7 +77,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
           this.saveConfig(item);
           break;
         case 'arrowClicked':
-          this.createNextPage(item);
+          this.getPageFromWidgetId(item);
           break;
         case 'editEvent':
           this.editEvent(item);
@@ -93,10 +119,5 @@ export class DynamicWidgetsEngineComponent implements OnInit {
     });
   }
 
-  createNextPage(item: IAngelWidget) {
-    this.engineEvents.emit({
-      type: 'goNext',
-      item
-    });
-  }
+
 }

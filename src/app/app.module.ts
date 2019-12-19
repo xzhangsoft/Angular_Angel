@@ -20,6 +20,7 @@ import { LiveComponent } from './live/live.component';
 import { FactoryComponent } from './factory/factory.component';
 import { FooterComponent } from './branding/footer/footer.component';
 import { ModalComponent } from './uiux/modal/modal.component';
+import { FlowContainerComponent } from './flow-container/flow-container.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ModalComponent } from './uiux/modal/modal.component';
     LiveComponent,
     FactoryComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    FlowContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,6 @@ import { ModalComponent } from './uiux/modal/modal.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [WidgetsComponent]
+  entryComponents: [WidgetsComponent, FlowContainerComponent]
 })
-export class AppModule {}
+export class AppModule { }

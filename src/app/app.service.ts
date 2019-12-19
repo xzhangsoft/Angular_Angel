@@ -7,7 +7,7 @@ import * as _ from 'lodash';
   providedIn: 'root'
 })
 export class AppService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getData(url: string) {
     return this.http.get<any>(url);
@@ -35,6 +35,23 @@ export class AppService {
     }
   }
 
+  getPageConfigById(pageId: string) {
+    try {
+      const localStoragePageConfig = JSON.parse(localStorage.getItem('pageMetadata')).angel;
+      if (localStoragePageConfig.length !== 0) {
+        return localStoragePageConfig.find((data: IAngelPage) => {
+          if (data.id === pageId) {
+            return data;
+          } else {
+            return null;
+          }
+        });
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
   updateEventConfig(eventConfig: IAngelEvent[]) {
     try {
       localStorage.setItem(
@@ -49,20 +66,22 @@ export class AppService {
   }
 
   getEventConfig(): IAngelEvent[] {
-    return localStorage.getItem('eventMetadata') ? _.get(JSON.parse(localStorage.getItem('eventMetadata')), 'angel'): [];
+    return localStorage.getItem('eventMetadata') ? _.get(JSON.parse(localStorage.getItem('eventMetadata')), 'angel') : [];
   }
 
-  getEventConfigById(id: string): IAngelEvent {
-    const localStorageEventConfig = JSON.parse(localStorage.getItem('eventMetadata'));
-    if (localStorageEventConfig.length !== 0) {
-      localStorageEventConfig.find((data: IAngelEvent) => {
-        if (data.widgetId === id) {
-          return data;
-        } else {
-          return null;
-        }
-      });
-    } else {
+  getEventConfigById(widgetId: string): IAngelEvent {
+    try {
+      const localStorageEventConfig = JSON.parse(localStorage.getItem('eventMetadata')).angel;
+      if (localStorageEventConfig.length !== 0) {
+        return localStorageEventConfig.find((data: IAngelEvent) => {
+          if (data.widgetId === widgetId) {
+            return data;
+          } else {
+            return null;
+          }
+        });
+      }
+    } catch (e) {
       return null;
     }
   }

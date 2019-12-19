@@ -9,10 +9,10 @@ import { AppService } from '../app.service';
   styleUrls: ['./live.component.scss']
 })
 export class LiveComponent implements OnInit {
-  zindexInit = 10;
+
   showSpinner = true;
   editingWidgets: IAngelWidget[] = [];
-  zindexAdd = 10;
+
 
   pageMetadata: IAngelPage[];
   eventMetadata: IAngelEvent[];
@@ -38,12 +38,12 @@ export class LiveComponent implements OnInit {
     this.eventMetadata = this.appService.getEventConfig();
   }
 
-  flow(event: { type: string; item: IAngelWidget }) {
-    const type = event.type;
-    const triggerWidgetId = event.item.id;
-    if (type === 'goNext' && this.eventMetadata.some(data => data.widgetId === triggerWidgetId)) {
-      console.log('goNext');
-      // Todo ...
-    }
-  }
+  // flow(event: { type: string; item: IAngelWidget }) {
+  //   const type = event.type;
+  //   const triggerWidgetId = event.item.id;
+  //   if (type === 'goNext' && this.eventMetadata.some(data => data.widgetId === triggerWidgetId)) {
+  //     console.log('goNext');
+  //     // Todo ...
+  //   }
+  // }
 }

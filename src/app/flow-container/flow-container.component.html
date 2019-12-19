@@ -1,0 +1,8 @@
+<div *ngIf="showFC" @toggleMenu class="flow-container" [ngStyle]="{ 'z-index': zindexInit }">
+    <div class="flow-widgets">
+        <div *ngFor="let item of widgetsConfigs" cdkDrag>
+            <angel-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event, item)">
+            </angel-dynamic-widgets-engine>
+        </div>
+    </div>
+</div>
