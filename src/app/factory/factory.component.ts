@@ -46,10 +46,10 @@ export class FactoryComponent implements OnInit {
   private editWidetId: string;
   private editPageId = '';
   private editWidgetId = '';
-  showmenu: boolean = true;
+  showmenu: boolean = false;
   // 尽量不要用相对路径，这样前面的/assets/images可以封装到constant里，不然你无法确定component在哪一级，不知道要加几个点
   // menuToggleImg = './../assets/images/expandmenu.png';
-  menuToggleImg = '/assets/images/expandmenu.png';
+  menuToggleImg = '/assets/images/Right.png';
 
   constructor(private appService: AppService, private router: ActivatedRoute) {
     setTimeout(() => {
@@ -83,8 +83,7 @@ export class FactoryComponent implements OnInit {
 
   toogleMenu() {
     this.showmenu = !this.showmenu;
-    // 再找一个反向箭头，显示的不一样
-    this.showmenu ? this.menuToggleImg = './../assets/images/expandmenu.png' : this.menuToggleImg = './../assets/images/expandmenu.png';
+    this.showmenu ? this.menuToggleImg = './../assets/images/Left.png' : this.menuToggleImg = './../assets/images/Right.png';
   }
 
   engineEvents(event: { type: string, item: IAngelWidget }) {
@@ -102,6 +101,7 @@ export class FactoryComponent implements OnInit {
         break;
     }
     $('#editEvent').modal('show');
+
   }
 
   modalConfirm(modalEvent: { type, val }) {

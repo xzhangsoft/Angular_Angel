@@ -11,14 +11,14 @@ import {
   templateUrl: './flow-container.component.html',
   styleUrls: ['./flow-container.component.scss'],
   animations: [
-    trigger('toggleMenu', [
+    trigger('popupFC', [
       transition('void => *', [
-        style({ transform: 'translateX(-100%)' }),
-        animate(300, style({ transform: 'translateX(0)' }))
+        style({ transform: 'translateY(100%)' }),
+        animate(300, style({ transform: 'translateY(0)' }))
       ]),
       // 动画时间可自行调整
       transition('* => void', [
-        animate(300, style({ transform: 'translateX(-100%)' }))
+        animate(300, style({ transform: 'translateY(100%)' }))
       ])
     ])
   ]
@@ -31,15 +31,28 @@ export class FlowContainerComponent implements OnInit {
   @Output() events = new EventEmitter<any>();
 
   showFC = false;
+  showCover = true;
 
 
   constructor() { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.showFC = true;
-    }, 1000);
+    this.showFC = true;
     console.log('=== bs widgets ===', this.widgetsConfigs);
+  }
+
+  preventEvent(event: Event) {
+    console.log('preventEvent');
+    event.stopPropagation();
+  }
+
+  closeFC() {
+    console.log('closeFC');
+    this.showFC = false;
+    setTimeout(() => {
+      this.showCover = false;
+    }, 300)
+
   }
 
 }

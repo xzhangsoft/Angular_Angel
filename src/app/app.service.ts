@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IAngelPage, IAngelWidget, IAngelEvent } from './interface';
+import { IAngelPage, IAngelEvent } from './interface';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { of } from 'rxjs';
@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 export class AppService {
   constructor(private http: HttpClient) { }
 
-  content: any = {};
+  content: any;
   getData(url: string) {
     return this.http.get<any>(url);
   }
