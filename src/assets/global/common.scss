@@ -1,0 +1,73 @@
+.menu-border-bottom {
+  border-bottom: 1px solid #7a92a5;
+}
+
+.lg-title {
+  font-size: 3.6rem;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.value-sm {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.desc-mid {
+  font-size: 1.8rem;
+}
+
+
+.border-radius-10 {
+  border-radius: 10px;
+}
+
+.sml-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.mid-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.large-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.hidden-overflow {
+  overflow-y: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
+.full-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.5);
+}

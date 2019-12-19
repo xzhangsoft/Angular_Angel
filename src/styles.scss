@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/bootstrap/bootstrap.css';
+@import './assets/global/common.scss';
+
+html {
+    font-size: 62.5%; //这里就是10/16x100%=62.5% 也就是默认10px的字号
+    overflow-y: hidden;;
+}
+
+html ::-webkit-scrollbar {display:none}
+
+body {
+    margin: 0;
+}

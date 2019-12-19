@@ -1,0 +1,22 @@
+.live-container {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f4f7;
+
+    .device-container {
+        width: 375px;
+        height: 600px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        .device-header {
+            height: 60px;
+        }
+    }
+
+}

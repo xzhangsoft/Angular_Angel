@@ -1,0 +1,45 @@
+<div class="page-container d-flex flex-column">
+    <div class="page-header d-flex flex-row justify-content-around align-items-center">
+        <div class="create-field-left">
+            <angel-label content="Page" cls="lg-title"></angel-label>
+            <angel-label content="Select a page to edit or create a new page" cls="desc-mid"></angel-label>
+        </div>
+        <div class="create-field-right p-3">
+            <img class="sml-icon" src="./../../assets/images/add.png">
+            <a class="badge" routerLink="/factory">Create New Page</a>
+            <!-- 这个按钮是不是文字上下没居中 -->
+        </div>
+    </div>
+    <div class="m-3" (click)="removeAllPage()">
+        <img class="mid-icon rubbish-icon" src="./../../assets/images/removeall.png">
+    </div>
+    <div class="page-body p-4 d-flex flex-row overflow-x-scroll">
+        <ng-container *ngFor="let page of readyPages">
+            <div class="ready-widget mx-5">
+                <div class="d-flex flex-row justify-content-around align-items-center button-mask">
+                    <div class="hide-btn edit-btn mr-3" (click)="reEdit(page)">
+                        edit
+                    </div>
+                    <div class="hide-btn live-btn ml-3" (click)="goLive(page)">
+                        live
+                    </div>
+                </div>
+                <div class="page-scrollable">
+                    <div *ngFor="let item of page.widgets" class="px-4">
+                        <angel-dynamic-widgets-engine [item]="item"></angel-dynamic-widgets-engine>
+                    </div>
+                </div>
+                <div class="footer">
+                    <angel-label [content]="page.id" cls="text-center my-2"></angel-label>
+                </div>
+            </div>
+        </ng-container>
+        <div *ngIf="showEmpty" class="empty-field">
+            No Aviable Page To Use. Create A New One !
+        </div>
+    </div>
+    <div *ngIf="content && modalContent" class="modal fade" id="removeAllPageModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <angel-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)"></angel-modal>=
+    </div>
+</div>

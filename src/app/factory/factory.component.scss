@@ -1,0 +1,47 @@
+.bd-sidebar {
+    color: white;
+    background-color: #23263c;
+    position: -webkit-sticky;
+    position: sticky;
+    height: 100%;
+    border-right: 1px solid rgba(0, 0, 0, .1);
+}
+
+.container-mobile {
+    overflow: hidden;
+    position: relative;
+    width: 375px;
+    height: 600px;
+    box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
+    // 此处margin依据是什么，这个margintop感觉不科学
+    margin: calc((100vh - 64rem) * .5) 10rem;
+    border-radius: 10px;
+
+    .mobile-header {
+        position: absolute;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        z-index: 10;
+        left: 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .mobile-body {
+        overflow-y: scroll;
+
+        .dropList {
+            margin-top: 6.5rem;
+            min-height: 200px;
+        }
+    }
+
+    .mobile-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        padding: 0 15px;
+        box-shadow: 0px 0px 10px 0px rgba(41, 85, 115, 0.21)
+    }
+}
