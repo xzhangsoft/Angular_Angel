@@ -5,10 +5,10 @@ import { LiveComponent } from './live/live.component';
 import { FactoryComponent } from './factory/factory.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'ody-tools', pathMatch: 'full' },
   { path: 'ody-tools', component: PageComponent },
   { path: 'factory', component: FactoryComponent },
-  { path: 'live', component: LiveComponent }
+  { path: 'live', component: LiveComponent },
+  { path: '', redirectTo: '/ody-tools', pathMatch: 'full' },
 ];
 
 @NgModule({
