@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'angel-modal',
+  selector: 'ultron-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
@@ -15,6 +15,6 @@ export class ModalComponent implements OnInit {
   }
 
   confirm(type: string, val: any) {
-    this.modalEvent.emit({type, val});
+    this.modalEvent.emit({ type, val });
   }
 }

@@ -4,6 +4,7 @@ import { IAngelPage, IAngelEvent } from './interface';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { of } from 'rxjs';
+import { UltronConstant } from './constant';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,11 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   content: any;
-  getData(url: string) {
+  getData(url = UltronConstant.ULTRON_METADATA_WIDGET_URL) {
     return this.http.get<any>(url);
   }
 
-  getContent(url = '/assets/static/content.json') {
-    // 此处url应该单独建立一个constant文件来存
-    // 此方法被多次调用了，而且每次返回的数据其实是一样的，应该做缓存
+  getContent(url = UltronConstant.ULTRON_IMAGE_URL) {
     if (this.content) {
       return of(this.content);
     }

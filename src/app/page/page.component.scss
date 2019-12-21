@@ -39,7 +39,11 @@
         position: relative;
         margin: 10rem 2rem 0 0;
         
-
+        .page-id {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+        }
         .empty-field{
             margin-left: 10rem;
         } 
@@ -103,4 +107,19 @@
 
 a.badge {
     font-size: 1.5rem;
+}
+
+:host ::ng-deep .page-body .mobile-footer {
+    border-top: 3px solid #eee;
+    margin: -1.6rem !important;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+:host ::ng-deep .page-body .bottom-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
 }

@@ -1,12 +1,20 @@
 import { Component, OnInit } from "@angular/core";
+import { AppService } from '../app.service';
+import { UltronModel } from '../app.model';
 
 @Component({
-  selector: "angel-branding",
+  selector: "ultron-branding",
   templateUrl: "./branding.component.html",
   styleUrls: ["./branding.component.scss"]
 })
 export class BrandingComponent implements OnInit {
-  constructor() {}
+  content: any;
+  constructor(private appService: AppService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.appService.getContent().subscribe((data) => {
+      this.content = data;
+    });
+    console.log(this.content);
+  }
 }

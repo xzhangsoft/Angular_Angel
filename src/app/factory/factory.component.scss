@@ -1,9 +1,10 @@
 .bd-sidebar {
+    
     color: white;
     background-color: #23263c;
     position: -webkit-sticky;
     position: sticky;
-    height: 100%;
+    height: calc(100vh - 60px);
     border-right: 1px solid rgba(0, 0, 0, .1);
 }
 
@@ -44,4 +45,19 @@
         padding: 0 15px;
         box-shadow: 0px 0px 10px 0px rgba(41, 85, 115, 0.21)
     }
+}
+
+:host ::ng-deep .mobile-body .mobile-footer {
+    border-top: 3px solid #eee;
+    margin: -1.6rem !important;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+:host ::ng-deep .mobile-body .bottom-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
 }

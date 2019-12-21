@@ -1,21 +1,26 @@
-
 <div *ngIf="profile" class="profile d-flex flex-row align-items-center">
    <img class="avatar" src="./../../assets/images/avatar.png">
-   <angel-label *ngIf="name" [content]="name" cls="text-white font-italic font-weight-bold pl-3"></angel-label>
+   <ultron-label *ngIf="name" [content]="name" cls="text-white font-italic font-weight-bold pl-3"
+      (dblclick)="editValue()"></ultron-label>
 </div>
-<div *ngIf="common" class="widget-container text-success p-4 mt-4 d-flex flex-row align-items-center">
+<div *ngIf="common" class="widget-container text-success p-4 mt-4 d-flex flex-row align-items-center"
+   [ngClass]="{'widget-border':border === true}">
    <div *ngIf="cardImg" class="credit-cards mr-4 flex-thin"></div>
    <div class="d-flex flex-row justify-content-between align-items-center flex-fat">
       <div (dblclick)="editValue()">
-         <angel-label *ngIf="title" [content]="title" [cls]="titleCls"></angel-label>
-         <angel-label *ngIf="value" [content]="value" [cls]="valueCls"></angel-label>
-         <angel-progress-bar *ngIf="progressbar" [cls]="progressCls"></angel-progress-bar>
+         <ultron-label *ngIf="title" [content]="title" [cls]="titleCls"></ultron-label>
+         <ultron-label *ngIf="value" [content]="value" [cls]="valueCls"></ultron-label>
+         <ultron-progress-bar *ngIf="progressbar" [cls]="progressCls"></ultron-progress-bar>
       </div>
-      <div *ngIf="showRightBtn === 'true'" class="arrow ml-4" (dblclick)="editArrowClick()" (click)="arrowClick()">></div>
+      <div *ngIf="showRightBtn === 'true'" class="arrow ml-4" (dblclick)="editArrowClick()" (click)="arrowClick()">>
+      </div>
    </div>
 </div>
-<div *ngIf="footer" class="mobile-footer d-flex flex-row justify-content-between align-items-center">
+<div *ngIf="footer" class="mobile-footer d-flex flex-row justify-content-between align-items-center m-4">
    <ng-container *ngFor="let footericon of icons">
-      <img class="mid-icon" [src]="footericon">
+      <img class="mid-icon fill-font" src="{{footericon}}">
    </ng-container>
+</div>
+<div *ngIf="bottomBtn" class="d-flex flex-row-reverse" (dblclick)="editArrowClick()" (click)="arrowClick()">
+   <button type="button" class="bottom-btn btn btn-success">></button>
 </div>

@@ -42,14 +42,12 @@ export class FactoryComponent implements OnInit {
   widgetsList: string[];
   content: any;
   modalContent: any;
-  private inputVal: string; // 没用到貌似
   private editWidetId: string;
   private editPageId = '';
   private editWidgetId = '';
-  showmenu: boolean = false;
-  // 尽量不要用相对路径，这样前面的/assets/images可以封装到constant里，不然你无法确定component在哪一级，不知道要加几个点
-  // menuToggleImg = './../assets/images/expandmenu.png';
+  showmenu: boolean = true;
   menuToggleImg = '/assets/images/Right.png';
+  widgetIndex = 1;
 
   constructor(private appService: AppService, private router: ActivatedRoute) {
     setTimeout(() => {
@@ -67,7 +65,7 @@ export class FactoryComponent implements OnInit {
         }
       }
     );
-    this.appService.getData('/assets/metadata/widgets.json').subscribe(data => {
+    this.appService.getData().subscribe(data => {
       this.widgetsList = data.widgets;
       this.basicWidgets = data.widgets;
     });
@@ -151,7 +149,14 @@ export class FactoryComponent implements OnInit {
     const editConfigModal = _.cloneDeep(this.content.editConfigModal);
     const inputGroup = _.get(editConfigModal, 'inputGroup');
     Object.keys(field).map((fieldKey) => {
-      if (fieldKey === 'title' || fieldKey === 'value' || fieldKey === 'showRightBtn') {
+      const resetArr = [
+        "name",
+        "title",
+        "value",
+        "showRightBtn"
+      ];
+
+      if (resetArr.includes(fieldKey)) {
         let group = {};
         group = {
           key: fieldKey,
@@ -245,6 +250,7 @@ export class FactoryComponent implements OnInit {
       );
     } else {
       const lastContainerData = _.cloneDeep(event.previousContainer.data);
+      this.widgetIndex += 1;
       copyArrayItem(
         lastContainerData,
         event.container.data,
@@ -252,6 +258,7 @@ export class FactoryComponent implements OnInit {
         event.currentIndex
       );
     }
-    this.widgetsList = this.basicWidgets;
+    const eventData: any = event.container.data[0];
+    eventData.id = 'widget' + this.widgetIndex;
   }
 }

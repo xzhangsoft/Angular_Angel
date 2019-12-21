@@ -33,7 +33,6 @@ export class FlowContainerComponent implements OnInit {
   showFC = false;
   showCover = true;
 
-
   constructor() { }
 
   ngOnInit() {

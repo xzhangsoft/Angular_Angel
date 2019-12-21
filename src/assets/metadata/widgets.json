@@ -1,13 +1,28 @@
 {
-    "widgets": [{
-            "id":"ody-nav",
+    "widgets": [
+        {
+            "id": "ody-text",
+            "widgetRef": "WidgetsComponent",
+            "fields": {
+                "border": false,
+                "common": true,
+                "showRightBtn": "false",
+                "title": "Edit Your Title",
+                "titleCls": "value",
+                "value": "Edit Your Value",
+                "valueCls": "title"
+            }
+        },
+        {
+            "id": "ody-nav",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "name": "mxnx xhxoxfxlxcxa nxnxox ",
                 "profile": true
             }
-        }, {
-            "id":"ody-quickcash",
+        },
+        {
+            "id": "ody-quickcash",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "common": true,
@@ -21,7 +36,7 @@
             }
         },
         {
-            "id":"ody-credit-card",
+            "id": "ody-credit-card",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "common": true,
@@ -34,7 +49,7 @@
             }
         },
         {
-            "id":"ody-loan",
+            "id": "ody-loan",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "common": true,
@@ -46,7 +61,7 @@
             }
         },
         {
-            "id":"ody-card",
+            "id": "ody-card",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "common": true,
@@ -58,7 +73,7 @@
             }
         },
         {
-            "id":"ody-global-wallet",
+            "id": "ody-global-wallet",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "common": true,
@@ -70,7 +85,46 @@
             }
         },
         {
-            "id":"ody-footer",
+            "id": "ody-qc-1",
+            "widgetRef": "WidgetsComponent",
+            "fields": {
+                "border": false,
+                "common": true,
+                "showRightBtn": "false",
+                "title": "No Ducument required",
+                "titleCls": "value",
+                "value": "No Credit check, Instant approval",
+                "valueCls": "title"
+            }
+        },
+        {
+            "id": "ody-qc-2",
+            "widgetRef": "WidgetsComponent",
+            "fields": {
+                "border": false,
+                "common": true,
+                "showRightBtn": "false",
+                "title": "Hassle-free process",
+                "titleCls": "value",
+                "value": "Done in 60 secs",
+                "valueCls": "title"
+            }
+        },
+        {
+            "id": "ody-global-wallet",
+            "widgetRef": "WidgetsComponent",
+            "fields": {
+                "border": false,
+                "common": true,
+                "showRightBtn": "false",
+                "title": "No processing fees",
+                "titleCls": "value",
+                "value": "Zero hidden costs",
+                "valueCls": "title"
+            }
+        },
+        {
+            "id": "ody-footer",
             "widgetRef": "WidgetsComponent",
             "fields": {
                 "footer": true,
@@ -79,6 +133,13 @@
                     "./../assets/images/wealth.png",
                     "./../assets/images/more.png"
                 ]
+            }
+        },
+        {
+            "id": "ody-bottom-btn",
+            "widgetRef": "WidgetsComponent",
+            "fields": {
+                "bottomBtn": true
             }
         }
     ]

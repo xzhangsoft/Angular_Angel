@@ -1,8 +1,9 @@
-<div *ngIf="showCover" class="flow-container" [ngStyle]="{ 'z-index': zindexInit }" (click)="closeFC()">
+<div *ngIf="showCover" class="flow-container d-flex flex-column" (click)="closeFC()">
     <div *ngIf="showFC" class="flow-widgets" @popupFC (click)="preventEvent($event)">
+        <img src="./../../assets/images/down.png" alt="" class="aaa mid-icon" (click)="closeFC()">
         <div *ngFor="let item of widgetsConfigs" cdkDrag>
-            <angel-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event, item)">
-            </angel-dynamic-widgets-engine>
+            <ultron-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event, item)" from="flow">
+            </ultron-dynamic-widgets-engine>
         </div>
     </div>
 </div>

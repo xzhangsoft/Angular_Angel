@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'angel-main-container',
+  selector: 'ultron-main-container',
   templateUrl: './main-container.component.html',
   styleUrls: ['./main-container.component.scss']
 })

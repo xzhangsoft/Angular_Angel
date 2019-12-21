@@ -11,6 +11,7 @@ declare var $: any;
   styleUrls: ['./page.component.scss']
 })
 export class PageComponent implements OnInit {
+
   readyPages: IAngelPage[];
 
   showEmpty = true;
@@ -19,12 +20,12 @@ export class PageComponent implements OnInit {
   modalContent: any;
 
   constructor(private appService: AppService,
-              private router: Router) {}
+    private router: Router) { }
 
   ngOnInit() {
     this.appService.getContent().subscribe(data => {
       this.content = data;
-     });
+    });
     this.readyPages = this.appService.getPageMetadata();
     if (this.readyPages && this.readyPages.length > 0) {
       this.showEmpty = false;
@@ -50,13 +51,27 @@ export class PageComponent implements OnInit {
   }
 
   removeAllPage() {
-    this.modalContent = this.content.confirmRemoveModal;
+    if (this.appService.getPageMetadata().length === 0) {
+      this.modalContent = this.content.warnRemoveModal;
+    } else {
+      this.modalContent = this.content.confirmRemoveModal;
+    }
     $('#removeAllPageModal').modal('show');
   }
 
-  modalConfirm() {
+  modalConfirm(val: any) {
+    const type = val.type;
+    switch (type) {
+      case 'confirmRemoveModal':
+        this.clearMetadata();
+        break;
+    }
     $('#removeAllPageModal').modal('hide');
+  }
+
+  clearMetadata() {
     localStorage.removeItem('pageMetadata');
+    localStorage.removeItem('eventMetadata');
     this.readyPages = _.get(this.appService.getPageMetadata(), 'angel');
     this.showEmpty = true;
   }

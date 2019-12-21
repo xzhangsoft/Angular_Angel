@@ -1,23 +1,23 @@
-<div *ngIf="showSpinner" class="page-loading">
-    <angel-spinner class="full-center"></angel-spinner>
+<div *ngIf="showSpinner" class="page-loading hidden-overflow">
+    <ultron-spinner class="full-center"></ultron-spinner>
 </div>
 <div class="row">
     <div @toggleMenu *ngIf="showmenu" class="col-lg-4 col-md-5 col-sm-12 side-menu">
-        <div class="bd-sidebar p-4">
+        <div class="bd-sidebar p-4  overflow-y-scroll">
             <div class="py-3" cdkDropList #readyList="cdkDropList" [cdkDropListData]="widgetsList"
                 [cdkDropListConnectedTo]="[editList]" (cdkDropListDropped)="drop($event)">
                 <div *ngFor="let widget of widgetsList" cdkDrag>
-                    <angel-dynamic-widgets-engine [item]="widget"></angel-dynamic-widgets-engine>
+                    <ultron-dynamic-widgets-engine [item]="widget"></ultron-dynamic-widgets-engine>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-8 col-md-7 col-sm-12 container-wrapper">
-        <img class="mid-icon" [src]="menuToggleImg" (click)="toogleMenu()">
+    <div class="col-lg-8 col-md-7 col-sm-12 container-wrapper ">
+        <img class="mid-icon m-5" [src]="menuToggleImg" (click)="toogleMenu()">
         <div class="container-mobile">
             <div class="mobile-header d-flex flex-row justify-content-between align-items-center px-4 py-2">
-                <h2 class="font-weight-bold text-center">Our Device</h2>
+                <h2 class="font-weight-bold text-center">{{content?.factory.deviceTitle}}</h2>
                 <div class="text-right d-inline">
                     <img class="mid-icon" src="./../assets/images/sign.png">
                     <img class="mid-icon ml-2" src="./../../assets/images/removeall.png" (click)="removeWidgets()">
@@ -29,8 +29,9 @@
                 <div class="px-4 pb-4 dropList" cdkDropList #editList="cdkDropList" [cdkDropListData]="editingWidgets"
                     [cdkDropListConnectedTo]="[readyList]" (cdkDropListDropped)="drop($event)">
                     <div *ngFor="let item of editingWidgets" cdkDrag>
-                        <angel-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event)">
-                        </angel-dynamic-widgets-engine>
+                        <ultron-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event)"
+                            from="factory">
+                        </ultron-dynamic-widgets-engine>
                     </div>
                 </div>
             </div>
@@ -39,7 +40,7 @@
 
         <div *ngIf="content && modalContent" class="modal fade" id="editEvent" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <angel-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)"></angel-modal>=
+            <ultron-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)"></ultron-modal>=
         </div>
     </div>
 </div>

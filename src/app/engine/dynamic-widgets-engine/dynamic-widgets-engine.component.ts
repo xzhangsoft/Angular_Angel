@@ -17,7 +17,7 @@ import * as _ from 'lodash';
 declare var $: any;
 
 @Component({
-  selector: 'angel-dynamic-widgets-engine',
+  selector: 'ultron-dynamic-widgets-engine',
   templateUrl: './dynamic-widgets-engine.component.html',
   styleUrls: ['./dynamic-widgets-engine.component.scss']
 })
@@ -27,6 +27,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
 
   @Output() engineEvents = new EventEmitter<any>();
   @Input() item: any;
+  @Input() from: string;
   @ViewChild(DywidgetsDirective, { static: true })
   dywidgetsDirective: DywidgetsDirective;
 
@@ -77,10 +78,14 @@ export class DynamicWidgetsEngineComponent implements OnInit {
           this.saveConfig(item);
           break;
         case 'arrowClicked':
-          this.getPageFromWidgetId(item);
+          if (this.from === 'flow') {
+            this.getPageFromWidgetId(item);
+          }
           break;
         case 'editEvent':
-          this.editEvent(item);
+          if (this.from === 'factory') {
+            this.editEvent(item);
+          }
           break;
         case 'editConfig':
           this.editConfig(item);

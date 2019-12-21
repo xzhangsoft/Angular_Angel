@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'angel-widgets',
+  selector: 'ultron-widgets',
   templateUrl: './widgets.component.html',
   styleUrls: ['./widgets.component.scss']
 })
@@ -21,12 +21,14 @@ export class WidgetsComponent implements OnInit {
   @Input() titleCls: string;
   @Input() valueCls: string;
   @Input() progressCls: string;
+  @Input() icons: any;
+  @Input() border = true;
 
   @Output() events = new EventEmitter<any>();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   arrowClick() {
     this.events.emit({

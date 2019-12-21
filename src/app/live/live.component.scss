@@ -20,5 +20,14 @@
             height: 60px;
         }
     }
-
 }
+
+:host ::ng-deep .device-container .mobile-footer {
+    border-top: 3px solid #eee;
+    margin: -1.6rem !important;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    padding: 10px;
+}
+

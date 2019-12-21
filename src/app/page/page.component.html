@@ -1,12 +1,12 @@
 <div class="page-container d-flex flex-column">
     <div class="page-header d-flex flex-row justify-content-around align-items-center">
         <div class="create-field-left">
-            <angel-label content="Page" cls="lg-title"></angel-label>
-            <angel-label content="Select a page to edit or create a new page" cls="desc-mid"></angel-label>
+            <ultron-label [content]="content?.page.title" cls="lg-title"></ultron-label>
+            <ultron-label [content]="content?.page.subTitle" cls="desc-mid"></ultron-label>
         </div>
         <div class="create-field-right p-3">
             <img class="sml-icon" src="./../../assets/images/add.png">
-            <a class="badge" routerLink="/factory">Create New Page</a>
+            <a class="badge" routerLink="/factory">{{content?.page.btnTitle}}</a>
             <!-- 这个按钮是不是文字上下没居中 -->
         </div>
     </div>
@@ -16,30 +16,33 @@
     <div class="page-body p-4 d-flex flex-row overflow-x-scroll">
         <ng-container *ngFor="let page of readyPages">
             <div class="ready-widget mx-5">
-                <div class="d-flex flex-row justify-content-around align-items-center button-mask">
-                    <div class="hide-btn edit-btn mr-3" (click)="reEdit(page)">
-                        edit
+                <div class="d-flex flex-column button-mask justify-content-center">
+                    <div class="page-id">
+                        <ultron-label [content]="page.id" cls="text-center my-2"></ultron-label>
                     </div>
-                    <div class="hide-btn live-btn ml-3" (click)="goLive(page)">
-                        live
+                    <div class="d-flex flex-row mt-5">
+                        <div class="hide-btn edit-btn mr-3" (click)="reEdit(page)">
+                            {{content?.page.edit}}
+                        </div>
+                        <div class="hide-btn live-btn ml-3" (click)="goLive(page)">
+                            {{content?.page.live}}
+                        </div>
                     </div>
                 </div>
                 <div class="page-scrollable">
                     <div *ngFor="let item of page.widgets" class="px-4">
-                        <angel-dynamic-widgets-engine [item]="item"></angel-dynamic-widgets-engine>
+                        <ultron-dynamic-widgets-engine [item]="item"></ultron-dynamic-widgets-engine>
                     </div>
                 </div>
-                <div class="footer">
-                    <angel-label [content]="page.id" cls="text-center my-2"></angel-label>
-                </div>
+
             </div>
         </ng-container>
         <div *ngIf="showEmpty" class="empty-field">
-            No Aviable Page To Use. Create A New One !
+            {{content?.page.emptyMsg}}
         </div>
     </div>
     <div *ngIf="content && modalContent" class="modal fade" id="removeAllPageModal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <angel-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)"></angel-modal>=
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <ultron-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)"></ultron-modal>=
     </div>
 </div>

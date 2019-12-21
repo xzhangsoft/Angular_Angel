@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'angel-drag-container',
+  selector: 'ultron-drag-container',
   templateUrl: './drag-container.component.html',
   styleUrls: ['./drag-container.component.scss']
 })

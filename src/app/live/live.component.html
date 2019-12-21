@@ -1,5 +1,5 @@
 <div *ngIf="showSpinner" class="page-loading">
-  <angel-spinner class="full-center"></angel-spinner>
+  <ultron-spinner class="full-center"></ultron-spinner>
 </div>
 <div class="live-container">
   <div class="device-container d-flex flex-column">
@@ -16,7 +16,8 @@
     </div>
     <div class="page-scrollable">
       <div *ngFor="let item of editingWidgets" class="px-4">
-        <angel-dynamic-widgets-engine [item]="item" (engineEvents)="flow($event)"></angel-dynamic-widgets-engine>
+        <ultron-dynamic-widgets-engine [item]="item" (engineEvents)="flow($event)" from="flow">
+        </ultron-dynamic-widgets-engine>
       </div>
     </div>
   </div>

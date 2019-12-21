@@ -5,12 +5,16 @@
     background-position: -138px -268px;
     background-image: url(../../assets/images/Cardmini_sprite3x.png);
 }
+.widget-border {
+    border: 1px solid #eee;
+    box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
+}
 
 .widget-container {
     width: 100%;
     border-radius: 10px;
-    box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
-    border: 1px solid #eee;
+    
+    
 
     .arrow {
         font-size: 1.6rem;
@@ -37,4 +41,10 @@
     padding: 0 1.5rem;
     height: 100px;
     background-image: linear-gradient(135deg, #000000, #281814) !important;
+}
+.bottom-btn {
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    font-weight: bold;
 }

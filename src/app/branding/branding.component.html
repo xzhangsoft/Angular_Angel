@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light vw-100">
-    <h3 class="font-weight-bold mr-5">Odyssey Tools</h3>
+    <h3 class="font-weight-bold mr-5">{{content?.app}}</h3>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item mr-4">
-                <a class="nav-link" routerLink="/ody-tools">PAGE</a>
+                <a class="nav-link" routerLink="/ody-tools">{{content?.nav.pageTab}}</a>
             </li>
             <li class="nav-item mr-4">
-                <a class="nav-link" routerLink="/factory">FACTORY</a>
+                <a class="nav-link" routerLink="/factory">{{content?.nav.factoryTab}}</a>
             </li>
             <li class="nav-item mr-4">
-                <a class="nav-link" routerLink="/live">LIVE</a>
+                <a class="nav-link" routerLink="/live">{{content?.nav.liveTab}}</a>
             </li>
         </ul>
     </div>

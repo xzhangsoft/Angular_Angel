@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'angel-label',
+  selector: 'ultron-label',
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss']
 })
