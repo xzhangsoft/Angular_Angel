@@ -89,4 +89,10 @@ export class AppService {
       return null;
     }
   }
+
+  exportMetadata(url = UltronConstant.ULTRON_METADATA_WIDGET_URL) {
+    const pageMetadata = JSON.stringify(this.getPageMetadata());
+    const eventMetadata = JSON.stringify(this.getEventConfig());
+    return this.http.post<any>('http://localhost:3000/savePage', { pageMetadata, eventMetadata});
+  }
 }

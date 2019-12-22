@@ -9,8 +9,9 @@
             <a class="badge" routerLink="/factory">{{content?.page.btnTitle}}</a>
         </div>
     </div>
-    <div class="m-3" (click)="removeAllPage()">
-        <img class="mid-icon rubbish-icon" src="./../../assets/images/removeall.png">
+    <div class="m-3 d-flex flex-row-reverse">
+        <img class="mid-icon" src="/assets/images/removeall.png" (click)="removeAllPage()">
+        <img class="mid-icon" src="/assets/images/export.png" (click)="exportMetadata()">
     </div>
     <div class="page-body p-4 d-flex flex-row overflow-x-scroll">
         <ng-container *ngFor="let page of readyPages">

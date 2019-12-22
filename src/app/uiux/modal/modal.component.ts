@@ -14,7 +14,6 @@ export class ModalComponent implements OnInit {
   eventType = 'Bottomsheet';
   choosedBtn = true;
 
-
   constructor() { }
 
   ngOnInit() {
