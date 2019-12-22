@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { animate } from '@angular/animations';
 
 @Component({
   selector: 'ultron-root',
@@ -10,7 +9,5 @@ import { animate } from '@angular/animations';
 export class AppComponent implements OnInit {
   constructor() { }
 
-
   ngOnInit() { }
-
 }

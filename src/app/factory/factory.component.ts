@@ -17,7 +17,7 @@ import {
 declare var $: any;
 
 @Component({
-  selector: 'app-factory',
+  selector: 'ultron-factory',
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.scss'],
   animations: [
@@ -150,10 +150,10 @@ export class FactoryComponent implements OnInit {
     const inputGroup = _.get(editConfigModal, 'inputGroup');
     Object.keys(field).map((fieldKey) => {
       const resetArr = [
-        "name",
-        "title",
-        "value",
-        "showRightBtn"
+        'name',
+        'title',
+        'value',
+        'showRightBtn'
       ];
 
       if (resetArr.includes(fieldKey)) {
@@ -224,6 +224,7 @@ export class FactoryComponent implements OnInit {
       const eventConfig: IAngelEvent = {};
       eventConfig.widgetId = this.editWidgetId;
       eventConfig.targetPage = targetPageId;
+      // marshal 待改标记
       currentEventConfigByIdcurrentEventConfig.some(data => {
         if (this.editWidgetId === data.widgetId) {
           data.widgetId = this.editWidgetId;

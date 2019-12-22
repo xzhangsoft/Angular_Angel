@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IAngelWidget, IAngelPage, IAngelEvent } from '../interface';
 import { AppService } from '../app.service';
 
 @Component({
-  selector: 'app-live',
+  selector: 'ultron-live',
   templateUrl: './live.component.html',
   styleUrls: ['./live.component.scss']
 })
@@ -12,8 +12,6 @@ export class LiveComponent implements OnInit {
 
   showSpinner = true;
   editingWidgets: IAngelWidget[] = [];
-
-
   pageMetadata: IAngelPage[];
   eventMetadata: IAngelEvent[];
 

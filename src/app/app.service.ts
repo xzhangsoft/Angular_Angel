@@ -17,7 +17,7 @@ export class AppService {
     return this.http.get<any>(url);
   }
 
-  getContent(url = UltronConstant.ULTRON_IMAGE_URL) {
+  getContent(url = UltronConstant.ULTRON_CONTENT_URL) {
     if (this.content) {
       return of(this.content);
     }

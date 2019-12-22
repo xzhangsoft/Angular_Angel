@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 
 @Component({
-  selector: 'app-flow-container',
+  selector: 'ultron-flow-container',
   templateUrl: './flow-container.component.html',
   styleUrls: ['./flow-container.component.scss'],
   animations: [
@@ -45,13 +45,12 @@ export class FlowContainerComponent implements OnInit {
     event.stopPropagation();
   }
 
-  closeFC() {
+  closeFC(event: Event) {
     console.log('closeFC');
+    event.stopPropagation();
     this.showFC = false;
     setTimeout(() => {
       this.showCover = false;
-    }, 300)
-
+    }, 300);
   }
-
 }
