@@ -58,6 +58,12 @@ export class PageComponent implements OnInit {
     $('#removeAllPageModal').modal('show');
   }
 
+  exportMetadata() {
+    this.appService.exportMetadata().subscribe(data => {
+      // 此处预留添加success modal
+    });
+  }
+
   modalConfirm(val: any) {
     const type = val.type;
     switch (type) {

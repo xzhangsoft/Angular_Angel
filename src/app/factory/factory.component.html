@@ -2,8 +2,8 @@
     <ultron-spinner class="full-center"></ultron-spinner>
 </div>
 <div class="row">
-    <div @toggleMenu *ngIf="showmenu" class="col-lg-4 col-md-5 col-sm-12 side-menu">
-        <div class="bd-sidebar p-4  overflow-y-scroll">
+    <div  class="col-lg-4 col-md-5 col-sm-12 side-menu">
+        <div *ngIf="showmenu" @toggleMenu class="bd-sidebar p-4  overflow-y-scroll">
             <div class="py-3" cdkDropList #readyList="cdkDropList" [cdkDropListData]="widgetsList"
                 [cdkDropListConnectedTo]="[editList]" (cdkDropListDropped)="drop($event)">
                 <div *ngFor="let widget of widgetsList" cdkDrag>
@@ -11,10 +11,11 @@
                 </div>
             </div>
         </div>
+        <img class="mid-icon m-5 menu-toggle-btn" [src]="menuToggleImg" (click)="toogleMenu()">
     </div>
 
     <div class="col-lg-8 col-md-7 col-sm-12 container-wrapper">
-        <img class="mid-icon m-5 menu-toggle-btn" [src]="menuToggleImg" (click)="toogleMenu()">
+        
         <div class="container-mobile">
             <div class="mobile-header d-flex flex-row justify-content-between align-items-center px-4 py-2">
                 <h2 class="font-weight-bold text-center">{{content?.factory.deviceTitle}}</h2>
@@ -22,7 +23,7 @@
                     <img class="mid-icon" src="./../assets/images/sign.png">
                     <img class="mid-icon ml-2" src="./../../assets/images/removeall.png" (click)="removeWidgets()">
                     <img class="mid-icon ml-2" src="./../assets/images/export.png"
-                        (click)="engineEvents({type: 'saveMetadata',item:''})">
+                        (click)="engineEvents({type: 'saveMetadata', item: ''})">
                 </div>
             </div>
             <div class="mobile-body">

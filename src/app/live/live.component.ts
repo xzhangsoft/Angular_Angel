@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IAngelWidget, IAngelPage, IAngelEvent } from '../interface';
 import { AppService } from '../app.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ultron-live',
@@ -10,13 +11,14 @@ import { AppService } from '../app.service';
 })
 export class LiveComponent implements OnInit {
 
-  showSpinner = true;
-  dialogEditingWidgets: IAngelWidget[] = [];
+  showSpinner: boolean = true;
+  // dialogEditingWidgets: IAngelWidget[] = [];
+  editingPage: IAngelPage;
+  editingPageStacks: IAngelPage[] = [];
   editingWidgets: IAngelWidget[] = [];
   pageMetadata: IAngelPage[];
   eventMetadata: IAngelEvent[];
-
-  enableBack = false;
+  enableBack: boolean = false;
 
   constructor(private router: ActivatedRoute, private appService: AppService) {
     setTimeout(() => {
@@ -24,12 +26,20 @@ export class LiveComponent implements OnInit {
     }, 500);
   }
 
+  get dialogEditingWidgets() {
+    return this.editingPage.widgets;
+  }
+
+  get hasBottomBtn() {
+    return this.editingPage.hasBottomBtn;
+  }
+
   ngOnInit() {
     this.router.queryParams.subscribe(params => {
       if (Object.keys(params).length !== 0) {
         console.log(params);
-        this.editingWidgets = JSON.parse(params.page).widgets;
-        this.dialogEditingWidgets = JSON.parse(params.page).widgets;
+        this.editingPage = JSON.parse(params.page);
+        this.editingWidgets = this.editingPage.widgets;
       }
     });
     this.getMetadata();
@@ -50,16 +60,18 @@ export class LiveComponent implements OnInit {
     try {
       const targetRepalcePageId = this.appService.getEventConfigById(triggerWidgetId).find(data => data.flowType === 'Dialog').targetPage;
       if (targetRepalcePageId) {
-
-        this.dialogEditingWidgets = this.appService.getPageConfigById(targetRepalcePageId).widgets;
+        this.editingPageStacks.push(_.cloneDeep(this.editingPage));
+        this.editingPage = this.appService.getPageConfigById(targetRepalcePageId);
       }
-
     } catch (e) {
       console.log('=== dialog failed ===');
     }
   }
 
   back() {
-    this.dialogEditingWidgets = this.editingWidgets;
+    this.editingPage = this.editingPageStacks.pop();
+    if (this.editingPageStacks.length < 1) {
+      this.enableBack = false;
+    }
   }
 }

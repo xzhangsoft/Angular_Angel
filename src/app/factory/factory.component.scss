@@ -1,11 +1,19 @@
-.bd-sidebar {
-    color: white;
-    background-color: #23263c;
-    position: -webkit-sticky;
-    position: sticky;
-    height: calc(100vh - 6rem);
-    border-right: 1px solid rgba(0, 0, 0, .1);
+.side-menu {
+    position: relative;
+    display: flex;
+    .bd-sidebar {
+        color: white;
+        background-color: #23263c;
+        position: -webkit-sticky;
+        position: sticky;
+        height: calc(100vh - 6rem);
+        border-right: 1px solid rgba(0, 0, 0, .1);
+    }
+    .mid-icon {
+        margin-right: 0;
+    }
 }
+
 .container-wrapper {
     position: relative;
     // display: flex;

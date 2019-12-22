@@ -17,14 +17,19 @@
         }
     }
 
-    .dialog-container {
+    .dialog-container  {
         position: relative;
         width: 600px;
         border-radius: 10px;
         background-color: white;
         box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
+        ::ng-deep .bottom-btn {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+        }
         .has-bottom-btn {
-            padding-bottom: 7rem;
+            padding-bottom: 5rem;
         }
     }
 }

@@ -14,6 +14,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { UltronConstant } from '../constant';
 declare var $: any;
 
 @Component({
@@ -46,7 +47,7 @@ export class FactoryComponent implements OnInit {
   private editPageId = '';
   private editWidgetId = '';
   showmenu: boolean = true;
-  menuToggleImg = '/assets/images/Right.png';
+  menuToggleImg = '/assets/images/Left.png';
   widgetIndex: number = 0;
   hasBottomBtn: boolean = false;
 
@@ -83,7 +84,7 @@ export class FactoryComponent implements OnInit {
 
   toogleMenu() {
     this.showmenu = !this.showmenu;
-    this.showmenu ? this.menuToggleImg = './../assets/images/Left.png' : this.menuToggleImg = './../assets/images/Right.png';
+    this.menuToggleImg = this.showmenu ? UltronConstant.ULTRON_IMAGE_URL + 'Left.png' : UltronConstant.ULTRON_IMAGE_URL + 'Right.png';
   }
 
   engineEvents(event: { type: string, item: IAngelWidget }) {
@@ -100,8 +101,9 @@ export class FactoryComponent implements OnInit {
         this.modalContent = this.content.editEventModal;
         break;
     }
-    $('#editEvent').modal('show');
-
+    setTimeout(() => {
+      $('#editEvent').modal('show');
+    });
   }
 
   modalConfirm(modalEvent: { type, val, eventType }) {
@@ -118,6 +120,7 @@ export class FactoryComponent implements OnInit {
         }
         const newPageId = val[0].inputVal;
         this.filterConfig(newPageId);
+        this.editPageId = newPageId;
         val[0].inputVal = '';
         break;
       case 'editEvent':
@@ -141,9 +144,7 @@ export class FactoryComponent implements OnInit {
         return data;
       });
       this.appService.updatePageMetadata(updateMeta);
-      this.editingWidgets.length = 0;
       this.modalContent = this.content.notifyCorrectResultModal;
-
     } else {
       this.modalContent = this.content.savePageConfigModal;
     }
