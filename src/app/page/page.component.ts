@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { IAngelPage, IAngelWidget } from '../interface';
+import { IAngelPage } from '../interface';
 import { AppService } from '../app.service';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
-  selector: 'app-page',
+  selector: 'ultron-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss']
 })
@@ -19,8 +19,7 @@ export class PageComponent implements OnInit {
   content: any;
   modalContent: any;
 
-  constructor(private appService: AppService,
-    private router: Router) { }
+  constructor(private appService: AppService, private router: Router) { }
 
   ngOnInit() {
     this.appService.getContent().subscribe(data => {
