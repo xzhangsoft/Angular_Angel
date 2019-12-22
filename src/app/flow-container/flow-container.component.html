@@ -1,5 +1,6 @@
 <div *ngIf="showCover" class="flow-container d-flex flex-column" (click)="closeFC($event)">
-    <div *ngIf="showFC" class="flow-widgets" @popupFC (click)="preventEvent($event)">
+    <div *ngIf="showFC" class="flow-widgets" [ngClass]="{'has-bottom-btn': hasBottomBtn}" @popupFC
+        (click)="preventEvent($event)">
         <img src="./../../assets/images/down.png" alt="" class="aaa mid-icon" (click)="closeFC()">
         <div *ngFor="let item of widgetsConfigs" cdkDrag>
             <ultron-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvents($event, item)" from="flow">

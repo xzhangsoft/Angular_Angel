@@ -18,10 +18,13 @@
         max-height: 520px;
         padding: 1.6rem;
         overflow: scroll;
+        &.has-bottom-btn {
+            padding-bottom: 7rem;
+        }
     }
 }
 :host ::ng-deep .flow-widgets .bottom-btn {
     position: absolute;
-    bottom: 40px;
-    right: 20px;
+    bottom: 2rem;
+    right: 2rem;
 }
