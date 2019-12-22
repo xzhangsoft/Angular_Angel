@@ -25,13 +25,14 @@ import {
 })
 export class FlowContainerComponent implements OnInit {
 
-  @Input() zindex = 10;
+  @Input() zindex: number = 10;
   @Input() widgetsConfigs: any;
+  @Input() hasBottomBtn: boolean = false;
 
   @Output() events = new EventEmitter<any>();
 
-  showFC = false;
-  showCover = true;
+  showFC: boolean = false;
+  showCover: boolean = true;
 
   constructor() { }
 

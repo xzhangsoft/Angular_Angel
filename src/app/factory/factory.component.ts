@@ -47,7 +47,8 @@ export class FactoryComponent implements OnInit {
   private editWidgetId = '';
   showmenu: boolean = true;
   menuToggleImg = '/assets/images/Right.png';
-  widgetIndex = 1;
+  widgetIndex: number = 1;
+  hasBottomBtn: boolean = false;
 
   constructor(private appService: AppService, private router: ActivatedRoute) {
     setTimeout(() => {
@@ -77,6 +78,7 @@ export class FactoryComponent implements OnInit {
 
   removeWidgets() {
     this.editingWidgets = [];
+    this.hasBottomBtn = false;
   }
 
   toogleMenu() {
@@ -118,9 +120,11 @@ export class FactoryComponent implements OnInit {
         const newPageId = val[0].inputVal;
         this.filterConfig(newPageId);
         $('#editEvent').modal('hide');
+        val[0].inputVal = '';
         break;
       case 'editEvent':
         this.updateEvent(val, eventType);
+        val[0].inputVal = '';
         break;
       case 'notify':
         $('#editEvent').modal('hide');
@@ -134,6 +138,7 @@ export class FactoryComponent implements OnInit {
       const updateMeta = metadata.map((data: IAngelPage) => {
         if (data.id === this.editPageId) {
           data.widgets = this.editingWidgets;
+          data.hasBottomBtn = this.hasBottomBtn;
         }
         return data;
       });
@@ -208,7 +213,8 @@ export class FactoryComponent implements OnInit {
     let pageConfig: IAngelPage = {};
     pageConfig = {
       id: newPageId,
-      widgets: this.editingWidgets
+      widgets: this.editingWidgets,
+      hasBottomBtn: this.hasBottomBtn
     };
     pageMetadata.push(pageConfig);
     return this.appService.updatePageMetadata(pageMetadata);
@@ -262,8 +268,11 @@ export class FactoryComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      if (lastContainerData[event.previousIndex].id === 'ody-bottom-btn') {
+        this.hasBottomBtn = true;
+      }
     }
-    const eventData: any = event.container.data[0];
+    const eventData: any = event.container.data[event.currentIndex];
     eventData.id = 'widget' + this.widgetIndex;
   }
 }

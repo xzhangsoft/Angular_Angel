@@ -2,6 +2,7 @@ export interface IAngelPage {
     id?: string;
     widgets?: IAngelWidget[];
     event?: IAngelEvent;
+    hasBottomBtn?: boolean;
 }
 
 export interface IAngelWidget {
