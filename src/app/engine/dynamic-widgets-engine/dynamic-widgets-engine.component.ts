@@ -43,6 +43,9 @@ export class DynamicWidgetsEngineComponent implements OnInit {
   }
 
   createNextPage(item: IAngelPage) {
+    if (!item) {
+      return;
+    }
     const flowField = {
       zindex: this.zindexInit,
       widgetsConfigs: item.widgets,
@@ -70,8 +73,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
     if (!targetPage) {
       return;
     }
-    const pageConfig = this.appService.getPageConfigById(targetPage);
-    this.createNextPage(pageConfig);
+    this.appService.getPageConfigById(targetPage) ? this.createNextPage(this.appService.getPageConfigById(targetPage)) : '';
   }
 
   adjustFlowType(item: IAngelWidget) {

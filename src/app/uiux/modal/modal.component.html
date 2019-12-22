@@ -8,9 +8,11 @@
             </button>
         </div>
         <div class="modal-body px-4 d-flex flex-column" *ngIf="modalContent?.isForm">
-            <div *ngIf="isBtnGroup" class="btn-group" role="group" (click)="chooseEventType($event)">
-                <button type="button" class="btn btn-light btn-group">Bottomsheet</button>
-                <button type="button" class="btn btn-light btn-group">Dialog</button>
+            <div *ngIf="modalContent?.isBtnGroup" class="btn-group" role="group" (click)="chooseEventType($event)">
+                <button type="button" class="btn btn-light btn-group"
+                    [ngClass]="{'choosed': eventType === 'Bottomsheet'}">Bottomsheet</button>
+                <button type="button" class="btn btn-light btn-group"
+                    [ngClass]="{'choosed': !(eventType === 'Bottomsheet')}">Dialog</button>
             </div>
             <form *ngFor="let input of modalContent?.inputGroup">
                 <div class="form-group input-group-lg">

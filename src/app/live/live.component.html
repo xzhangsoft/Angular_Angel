@@ -24,7 +24,7 @@
   </div>
   <div class="dialog-container p-4">
     <img *ngIf="enableBack" src="./../../assets/images/back.png" alt="" class="mid-icon" (click)="back()">
-    <div class="page-scrollable">
+    <div class="page-scrollable" [ngClass]="{'has-bottom-btn': hasBottomBtn}">
       <div *ngFor="let item of dialogEditingWidgets" class="px-4">
         <ultron-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvent($event)" from="flow" type="Dialog">
         </ultron-dynamic-widgets-engine>

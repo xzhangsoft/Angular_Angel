@@ -8,10 +8,12 @@ import * as _ from 'lodash';
 })
 export class ModalComponent implements OnInit {
   @Input() modalContent: any;
-  @Input() isBtnGroup: boolean = true;
+  @Input() isBtnGroup: boolean = false;
   @Output() modalEvent = new EventEmitter<any>();
 
-  eventType = 'Bottomsheet'
+  eventType = 'Bottomsheet';
+  choosedBtn = true;
+
 
   constructor() { }
 

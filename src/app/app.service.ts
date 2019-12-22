@@ -49,8 +49,6 @@ export class AppService {
         return localStoragePageConfig.find((data: IAngelPage) => {
           if (data.id === pageId) {
             return data;
-          } else {
-            return null;
           }
         });
       }
@@ -80,11 +78,12 @@ export class AppService {
     try {
       const localStorageEventConfig = JSON.parse(localStorage.getItem('eventMetadata')).angel;
       if (localStorageEventConfig.length !== 0) {
-        return localStorageEventConfig.filter((data: IAngelEvent) => {
+        const result = localStorageEventConfig.filter((data: IAngelEvent) => {
           if (data.widgetId === widgetId) {
             return data;
           }
         });
+        return result;
       }
     } catch (e) {
       return null;

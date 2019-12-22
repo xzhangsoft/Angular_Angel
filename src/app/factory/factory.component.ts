@@ -47,7 +47,7 @@ export class FactoryComponent implements OnInit {
   private editWidgetId = '';
   showmenu: boolean = true;
   menuToggleImg = '/assets/images/Right.png';
-  widgetIndex: number = 1;
+  widgetIndex: number = 0;
   hasBottomBtn: boolean = false;
 
   constructor(private appService: AppService, private router: ActivatedRoute) {
@@ -111,7 +111,6 @@ export class FactoryComponent implements OnInit {
     switch (confirmType) {
       case 'editConfig':
         this.updateWidgetConfig(val);
-        $('#editEvent').modal('hide');
         break;
       case 'savePage':
         if (val.length < 1) {
@@ -119,7 +118,6 @@ export class FactoryComponent implements OnInit {
         }
         const newPageId = val[0].inputVal;
         this.filterConfig(newPageId);
-        $('#editEvent').modal('hide');
         val[0].inputVal = '';
         break;
       case 'editEvent':
@@ -127,9 +125,9 @@ export class FactoryComponent implements OnInit {
         val[0].inputVal = '';
         break;
       case 'notify':
-        $('#editEvent').modal('hide');
         break;
     }
+    $('#editEvent').modal('hide');
   }
 
   saveEventCheck() {
@@ -143,7 +141,9 @@ export class FactoryComponent implements OnInit {
         return data;
       });
       this.appService.updatePageMetadata(updateMeta);
+      this.editingWidgets.length = 0;
       this.modalContent = this.content.notifyCorrectResultModal;
+
     } else {
       this.modalContent = this.content.savePageConfigModal;
     }
