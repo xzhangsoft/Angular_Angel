@@ -76,15 +76,13 @@ export class AppService {
     return localStorage.getItem('eventMetadata') ? _.get(JSON.parse(localStorage.getItem('eventMetadata')), 'angel') : [];
   }
 
-  getEventConfigById(widgetId: string): IAngelEvent {
+  getEventConfigById(widgetId: string): IAngelEvent[] {
     try {
       const localStorageEventConfig = JSON.parse(localStorage.getItem('eventMetadata')).angel;
       if (localStorageEventConfig.length !== 0) {
-        return localStorageEventConfig.find((data: IAngelEvent) => {
+        return localStorageEventConfig.filter((data: IAngelEvent) => {
           if (data.widgetId === widgetId) {
             return data;
-          } else {
-            return null;
           }
         });
       }

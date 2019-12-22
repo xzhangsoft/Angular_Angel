@@ -13,5 +13,6 @@ export interface IAngelWidget {
 export interface IAngelEvent {
     widgetId?: string;
     targetPage?: string;
+    flowType?: string;
 }
 

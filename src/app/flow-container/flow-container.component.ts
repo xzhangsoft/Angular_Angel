@@ -47,7 +47,7 @@ export class FlowContainerComponent implements OnInit {
 
   closeFC(event: Event) {
     console.log('closeFC');
-    event.stopPropagation();
+    // event.stopPropagation();
     this.showFC = false;
     setTimeout(() => {
       this.showCover = false;

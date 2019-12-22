@@ -28,6 +28,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
   @Output() engineEvents = new EventEmitter<any>();
   @Input() item: any;
   @Input() from: string;
+  @Input() type: string = 'Bottomsheet';
   @ViewChild(DywidgetsDirective, { static: true })
   dywidgetsDirective: DywidgetsDirective;
 
@@ -61,13 +62,23 @@ export class DynamicWidgetsEngineComponent implements OnInit {
   }
 
   getPageFromWidgetId(item: IAngelWidget) {
+
     const widgetId = item.id;
-    const targetPage: string = _.get(this.appService.getEventConfigById(widgetId), 'targetPage');
+    const page: IAngelEvent[] = this.appService.getEventConfigById(widgetId);
+    const targetPage = _.get(page.find((data: IAngelEvent) => data.flowType === 'Bottomsheet'), 'targetPage');
     if (!targetPage) {
       return;
     }
     const pageConfig = this.appService.getPageConfigById(targetPage);
     this.createNextPage(pageConfig);
+  }
+
+  adjustFlowType(item: IAngelWidget) {
+    if (this.type === 'Bottomsheet') {
+      this.getPageFromWidgetId(item);
+      return;
+    }
+    this.replacePageEvent(item);
   }
 
   addSubscribe(componentRef) {
@@ -79,7 +90,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
           break;
         case 'arrowClicked':
           if (this.from === 'flow') {
-            this.getPageFromWidgetId(item);
+            this.adjustFlowType(item);
           }
           break;
         case 'editEvent':
@@ -101,6 +112,13 @@ export class DynamicWidgetsEngineComponent implements OnInit {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  replacePageEvent(item: IAngelWidget) {
+    this.engineEvents.emit({
+      type: 'replacePage',
+      item
+    });
   }
 
   saveConfig(item: IAngelWidget) {

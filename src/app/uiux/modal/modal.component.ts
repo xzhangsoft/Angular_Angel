@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ultron-modal',
@@ -7,7 +8,10 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
   @Input() modalContent: any;
+  @Input() isBtnGroup: boolean = true;
   @Output() modalEvent = new EventEmitter<any>();
+
+  eventType = 'Bottomsheet'
 
   constructor() { }
 
@@ -15,6 +19,11 @@ export class ModalComponent implements OnInit {
   }
 
   confirm(type: string, val: any) {
-    this.modalEvent.emit({ type, val });
+    this.modalEvent.emit({ type, val, eventType: this.eventType });
+  }
+
+  chooseEventType(event: any) {
+    this.eventType = _.get(event.target, 'textContent', 'Bottomsheet');
+    console.log(this.eventType);
   }
 }

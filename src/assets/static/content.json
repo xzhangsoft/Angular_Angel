@@ -20,6 +20,7 @@
         "title": "Edit Your Event",
         "type": "editEvent",
         "isForm": true,
+        "isBtnGroup": true,
         "inputGroup": [
             {
                 "key": "target-page:",

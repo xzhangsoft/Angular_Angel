@@ -102,9 +102,10 @@ export class FactoryComponent implements OnInit {
 
   }
 
-  modalConfirm(modalEvent: { type, val }) {
+  modalConfirm(modalEvent: { type, val, eventType }) {
     const confirmType = modalEvent.type;
     const val = modalEvent.val;
+    const eventType = modalEvent.eventType;
     switch (confirmType) {
       case 'editConfig':
         this.updateWidgetConfig(val);
@@ -119,7 +120,7 @@ export class FactoryComponent implements OnInit {
         $('#editEvent').modal('hide');
         break;
       case 'editEvent':
-        this.updateEvent(val);
+        this.updateEvent(val, eventType);
         break;
       case 'notify':
         $('#editEvent').modal('hide');
@@ -213,8 +214,8 @@ export class FactoryComponent implements OnInit {
     return this.appService.updatePageMetadata(pageMetadata);
   }
 
-  updateEvent(val: [{ key: '', value: '', inputVal: '' }]) {
-    const targetPageId = val[0].inputVal;
+  updateEvent(val: [{ key: string, value: string, inputVal: string }], flowType: string) {
+    const targetPageId = val.find(data => data.key === 'target-page:').inputVal;
     if (!targetPageId) {
       this.modalContent = this.content.warnEventModal;
       return;
@@ -222,11 +223,13 @@ export class FactoryComponent implements OnInit {
     const currentEventConfigByIdcurrentEventConfig: IAngelEvent[] = this.appService.getEventConfig();
     if (currentEventConfigByIdcurrentEventConfig.length !== 0) {
       const eventConfig: IAngelEvent = {};
+      eventConfig.flowType = flowType;
       eventConfig.widgetId = this.editWidgetId;
       eventConfig.targetPage = targetPageId;
       // marshal 待改标记
       currentEventConfigByIdcurrentEventConfig.some(data => {
-        if (this.editWidgetId === data.widgetId) {
+        if (this.editWidgetId === data.widgetId && flowType === data.flowType) {
+          data.flowType = flowType;
           data.widgetId = this.editWidgetId;
           data.targetPage = targetPageId;
           return true;
@@ -234,6 +237,7 @@ export class FactoryComponent implements OnInit {
       }) ? '' : currentEventConfigByIdcurrentEventConfig.push(eventConfig);
     } else {
       const eventConfig: IAngelEvent = {};
+      eventConfig.flowType = flowType;
       eventConfig.widgetId = this.editWidgetId;
       eventConfig.targetPage = targetPageId;
       currentEventConfigByIdcurrentEventConfig.push(eventConfig);

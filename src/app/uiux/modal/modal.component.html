@@ -7,15 +7,20 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body px-4" *ngIf="modalContent?.isForm">
+        <div class="modal-body px-4 d-flex flex-column" *ngIf="modalContent?.isForm">
+            <div *ngIf="isBtnGroup" class="btn-group" role="group" (click)="chooseEventType($event)">
+                <button type="button" class="btn btn-light btn-group">Bottomsheet</button>
+                <button type="button" class="btn btn-light btn-group">Dialog</button>
+            </div>
             <form *ngFor="let input of modalContent?.inputGroup">
                 <div class="form-group input-group-lg">
                     <h3 for="target-page" class="col-form-label">{{input.key}}</h3>
-                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-lg"
-                        id="target-page" [(ngModel)]="input.inputVal" [ngModelOptions]="{standalone: true}">
+                    <input type="text" class="form-control" aria-describedby="inputGroup-sizing-lg" id="target-page"
+                        [(ngModel)]="input.inputVal" [ngModelOptions]="{standalone: true}">
                 </div>
             </form>
         </div>
+
         <div class="modal-footer">
             <button type="button" class="btn btn-primary btn-lg"
                 (click)="confirm(modalContent?.type, modalContent.inputGroup)"><b>{{modalContent.confirm}}</b></button>
