@@ -44,7 +44,8 @@ export class DynamicWidgetsEngineComponent implements OnInit {
   createNextPage(item: IAngelPage) {
     const flowField = {
       zindex: this.zindexInit,
-      widgetsConfigs: item.widgets
+      widgetsConfigs: item.widgets,
+      hasBottomBtn: item.hasBottomBtn
     }
     this.dynamicConf(FlowContainerComponent, item, flowField);
   }
