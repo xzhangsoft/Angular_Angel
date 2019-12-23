@@ -55,7 +55,9 @@ export class PageComponent implements OnInit {
     } else {
       this.modalContent = this.content.confirmRemoveModal;
     }
-    $('#removeAllPageModal').modal('show');
+    setTimeout(() => {
+      $('#removeAllPageModal').modal('show');
+    });
   }
 
   exportMetadata() {

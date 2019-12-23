@@ -118,6 +118,7 @@ export class FactoryComponent implements OnInit {
 
         this.updateWidgetConfig(val);
         break;
+      case 'warn':
       case 'savePage':
         if (!_.get(val[0], 'inputVal')) {
           this.showWarn = true;
@@ -126,7 +127,6 @@ export class FactoryComponent implements OnInit {
         this.showWarn = false;
         const newPageId = val[0].inputVal;
         this.filterConfig(newPageId);
-        this.editPageId = newPageId;
         val[0].inputVal = '';
         break;
       case 'editEvent':
@@ -211,6 +211,7 @@ export class FactoryComponent implements OnInit {
     } else {
       if (this.addPageConfig(metadata, newPageId)) {
         this.modalContent = this.content.notifyCorrectResultModal;
+        this.editPageId = newPageId;
       } else {
         this.modalContent = this.content.notifyFailedResultModal;
       }

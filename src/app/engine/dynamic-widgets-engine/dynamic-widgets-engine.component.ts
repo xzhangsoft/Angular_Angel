@@ -50,7 +50,7 @@ export class DynamicWidgetsEngineComponent implements OnInit {
       zindex: this.zindexInit,
       widgetsConfigs: item.widgets,
       hasBottomBtn: item.hasBottomBtn
-    }
+    };
     this.dynamicConf(FlowContainerComponent, item, flowField);
   }
 

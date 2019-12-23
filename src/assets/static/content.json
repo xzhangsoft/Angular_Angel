@@ -86,7 +86,7 @@
     },
     "warnRemoveModal": {
         "title": "You Have No Page To Remove !",
-        "type": "warnRemoveModal",
+        "type": "warn",
         "confirm": "OK"
     }
 }
