@@ -9,10 +9,12 @@ import * as _ from 'lodash';
 export class ModalComponent implements OnInit {
   @Input() modalContent: any;
   @Input() isBtnGroup: boolean = false;
+  @Input() showWarn = false;
   @Output() modalEvent = new EventEmitter<any>();
 
   eventType = 'Bottomsheet';
   choosedBtn = true;
+
 
   constructor() { }
 

@@ -21,6 +21,7 @@
                         [(ngModel)]="input.inputVal" [ngModelOptions]="{standalone: true}">
                 </div>
             </form>
+            <div *ngIf="showWarn" class="text-danger">please fill in !</div>
         </div>
 
         <div class="modal-footer">

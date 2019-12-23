@@ -2,7 +2,7 @@
     <ultron-spinner class="full-center"></ultron-spinner>
 </div>
 <div class="row">
-    <div  class="col-lg-4 col-md-5 col-sm-12 side-menu">
+    <div class="col-lg-4 col-md-5 col-sm-12 side-menu">
         <div *ngIf="showmenu" @toggleMenu class="bd-sidebar p-4  overflow-y-scroll">
             <div class="py-3" cdkDropList #readyList="cdkDropList" [cdkDropListData]="widgetsList"
                 [cdkDropListConnectedTo]="[editList]" (cdkDropListDropped)="drop($event)">
@@ -15,12 +15,12 @@
     </div>
 
     <div class="col-lg-8 col-md-7 col-sm-12 container-wrapper">
-        
+
         <div class="container-mobile">
             <div class="mobile-header d-flex flex-row justify-content-between align-items-center px-4 py-2">
                 <h2 class="font-weight-bold text-center">{{content?.factory.deviceTitle}}</h2>
                 <div class="text-right d-inline">
-                    <img class="mid-icon" src="./../assets/images/sign.png">
+                    <img class="mid-icon" src="./../assets/images/add.png" (click)="addNewPage()">
                     <img class="mid-icon ml-2" src="./../../assets/images/removeall.png" (click)="removeWidgets()">
                     <img class="mid-icon ml-2" src="./../assets/images/export.png"
                         (click)="engineEvents({type: 'saveMetadata', item: ''})">
@@ -41,7 +41,8 @@
 
         <div *ngIf="content && modalContent" class="modal fade" id="editEvent" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <ultron-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)"></ultron-modal>=
+            <ultron-modal [modalContent]="modalContent" (modalEvent)="modalConfirm($event)" [showWarn]="showWarn">
+            </ultron-modal>=
         </div>
     </div>
 </div>

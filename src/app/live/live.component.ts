@@ -31,6 +31,9 @@ export class LiveComponent implements OnInit {
   }
 
   get hasBottomBtn() {
+    if (!this.editingPage) {
+      return false;
+    }
     return this.editingPage.hasBottomBtn;
   }
 

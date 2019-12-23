@@ -51,6 +51,8 @@ export class FactoryComponent implements OnInit {
   widgetIndex: number = 0;
   hasBottomBtn: boolean = false;
 
+  showWarn = false;
+
   constructor(private appService: AppService, private router: ActivatedRoute) {
     setTimeout(() => {
       this.showSpinner = false;
@@ -88,6 +90,7 @@ export class FactoryComponent implements OnInit {
   }
 
   engineEvents(event: { type: string, item: IAngelWidget }) {
+    this.showWarn = false;
     const item = event.item;
     switch (event.type) {
       case 'saveMetadata':
@@ -112,12 +115,15 @@ export class FactoryComponent implements OnInit {
     const eventType = modalEvent.eventType;
     switch (confirmType) {
       case 'editConfig':
+
         this.updateWidgetConfig(val);
         break;
       case 'savePage':
-        if (val.length < 1) {
+        if (!_.get(val[0], 'inputVal')) {
+          this.showWarn = true;
           break;
         }
+        this.showWarn = false;
         const newPageId = val[0].inputVal;
         this.filterConfig(newPageId);
         this.editPageId = newPageId;
@@ -128,14 +134,14 @@ export class FactoryComponent implements OnInit {
         val[0].inputVal = '';
         break;
       case 'notify':
+        $('#editEvent').modal('hide');
         break;
     }
-    $('#editEvent').modal('hide');
   }
 
   saveEventCheck() {
     const metadata: IAngelPage[] = this.appService.getPageMetadata();
-    if (metadata.some(data => data.id === this.editPageId)) {
+    if (this.editPageId && metadata.some(data => data.id === this.editPageId)) {
       const updateMeta = metadata.map((data: IAngelPage) => {
         if (data.id === this.editPageId) {
           data.widgets = this.editingWidgets;
@@ -194,6 +200,7 @@ export class FactoryComponent implements OnInit {
       return data;
     });
     this.editingWidgets = cloneEditWidgets;
+    this.modalContent = this.content.notifyCorrectResultModal;
     console.log(this.editingWidgets, cloneEditWidgets);
   }
 
@@ -224,9 +231,10 @@ export class FactoryComponent implements OnInit {
   updateEvent(val: [{ key: string, value: string, inputVal: string }], flowType: string) {
     const targetPageId = val.find(data => data.key === 'target-page:').inputVal;
     if (!targetPageId) {
-      this.modalContent = this.content.warnEventModal;
+      this.showWarn = true;
       return;
     }
+    this.showWarn = false;
     const currentEventConfigByIdcurrentEventConfig: IAngelEvent[] = this.appService.getEventConfig();
     if (currentEventConfigByIdcurrentEventConfig.length !== 0) {
       const eventConfig: IAngelEvent = {};
@@ -251,6 +259,12 @@ export class FactoryComponent implements OnInit {
     }
     this.modalContent = this.content.notifyCorrectResultModal;
     this.appService.updateEventConfig(currentEventConfigByIdcurrentEventConfig);
+  }
+
+  addNewPage() {
+    this.editingWidgets = [];
+    this.hasBottomBtn = false;
+    this.editPageId = '';
   }
 
   drop(event: CdkDragDrop<string[]>) {

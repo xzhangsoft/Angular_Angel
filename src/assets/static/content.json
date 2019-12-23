@@ -29,12 +29,6 @@
         ],
         "confirm": "Save"
     },
-    "warnEventModal": {
-        "title": "Please Fill In Target Page Id",
-        "type": "editEvent",
-        "isForm": false,
-        "confirm": "Ok"
-    },
     "savePageConfigModal": {
         "title": "Save Your Page",
         "type": "savePage",
@@ -61,6 +55,12 @@
     },
     "notifyCorrectResultModal": {
         "title": "Success!",
+        "type": "notify",
+        "isForm": false,
+        "confirm": "Ok"
+    },
+    "notifyCorrectExportResultModal": {
+        "title": "Success To Save In Local!",
         "type": "notify",
         "isForm": false,
         "confirm": "Ok"

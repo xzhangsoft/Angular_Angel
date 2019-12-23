@@ -59,9 +59,11 @@ export class PageComponent implements OnInit {
   }
 
   exportMetadata() {
-    this.appService.exportMetadata().subscribe(data => {
-      // 此处预留添加success modal
+    this.appService.exportMetadata().subscribe((data) => {
+
     });
+    this.modalContent = this.content.notifyCorrectExportResultModal;
+    $('#removeAllPageModal').modal('show');
   }
 
   modalConfirm(val: any) {

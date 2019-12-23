@@ -65,10 +65,8 @@ export class DynamicWidgetsEngineComponent implements OnInit {
     this.assignProperty(componentRef.instance, fields);
   }
 
-  getPageFromWidgetId(item: IAngelWidget) {
+  getPageFromWidgetId(item: IAngelWidget, page) {
 
-    const widgetId = item.id;
-    const page: IAngelEvent[] = this.appService.getEventConfigById(widgetId);
     const targetPage = _.get(page.find((data: IAngelEvent) => data.flowType === 'Bottomsheet'), 'targetPage');
     if (!targetPage) {
       return;
@@ -77,11 +75,16 @@ export class DynamicWidgetsEngineComponent implements OnInit {
   }
 
   adjustFlowType(item: IAngelWidget) {
-    if (this.type === 'Bottomsheet') {
-      this.getPageFromWidgetId(item);
-      return;
+    const widgetId = item.id;
+    const page: IAngelEvent[] = this.appService.getEventConfigById(widgetId);
+    if (page) {
+      if (this.type === 'Bottomsheet' && page.find(data => data.flowType === 'Bottomsheet')) {
+        this.getPageFromWidgetId(item, page);
+      }
+      if (this.type === 'Dialog' && page.find(data => data.flowType === 'Dialog')) {
+        this.replacePageEvent(item);
+      }
     }
-    this.replacePageEvent(item);
   }
 
   addSubscribe(componentRef) {
