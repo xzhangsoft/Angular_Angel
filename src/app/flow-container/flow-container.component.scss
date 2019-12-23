@@ -8,6 +8,10 @@
     background-color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
     border-radius: 5px;
+
+    .mid-icon {
+        cursor: pointer;
+    }
     
     .flow-widgets {
         background-color: white;
@@ -17,7 +21,8 @@
         bottom: 0;
         max-height: 520px;
         padding: 1.6rem;
-        overflow: scroll;
+        // 如果有scroll那么第二个bs的内容高度一定不能比第一个高，之前已经讨论过不会放太多在bs里，所以scroll应该可以去掉
+        // overflow: scroll;
         &.has-bottom-btn {
             padding-bottom: 7rem;
         }

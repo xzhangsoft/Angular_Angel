@@ -27,14 +27,11 @@ export class LiveComponent implements OnInit {
   }
 
   get dialogEditingWidgets() {
-    return this.editingPage.widgets;
+    return _.get(this.editingPage, 'widgets', []);
   }
 
   get hasBottomBtn() {
-    if (!this.editingPage) {
-      return false;
-    }
-    return this.editingPage.hasBottomBtn;
+    return _.get(this.editingPage, 'hasBottomBtn', false);
   }
 
   ngOnInit() {
