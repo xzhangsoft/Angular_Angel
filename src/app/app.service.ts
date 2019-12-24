@@ -88,7 +88,7 @@ export class AppService {
         return result;
       }
     } catch (e) {
-      return null;
+      return [];
     }
   }
 
@@ -99,9 +99,9 @@ export class AppService {
   }
 
   generateWidgetId() {
-    const widgetIdIndex = localStorage.getItem('widgetIdIndex') ? parseInt(localStorage.getItem('widgetIdIndex')) : 0;
-
-    localStorage.setItem('widgetIdIndex', (widgetIdIndex + 1).toString());
-    return widgetIdIndex + 1;
+    const widgetIdIndex = localStorage.getItem('widgetIdIndex') ? parseInt(localStorage.getItem('widgetIdIndex'), 10) : 0;
+    const nextWidgetIdIndex = widgetIdIndex + 1;
+    localStorage.setItem('widgetIdIndex', nextWidgetIdIndex.toString());
+    return nextWidgetIdIndex;
   }
 }

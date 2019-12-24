@@ -65,25 +65,23 @@ export class DynamicWidgetsEngineComponent implements OnInit {
     this.assignProperty(componentRef.instance, fields);
   }
 
-  getPageFromWidgetId(item: IAngelWidget, page) {
+  getPageFromWidgetId(item: IAngelWidget, events: IAngelEvent[]) {
 
-    const targetPage = _.get(page.find((data: IAngelEvent) => data.flowType === 'Bottomsheet'), 'targetPage');
+    const targetPage = _.get(events.find((data: IAngelEvent) => data.flowType === 'Bottomsheet'), 'targetPage');
     if (!targetPage) {
       return;
     }
-    this.appService.getPageConfigById(targetPage) ? this.createNextPage(this.appService.getPageConfigById(targetPage)) : '';
+    this.appService.getPageConfigById(targetPage) && this.createNextPage(this.appService.getPageConfigById(targetPage));
   }
 
   adjustFlowType(item: IAngelWidget) {
     const widgetId = item.id;
-    const page: IAngelEvent[] = this.appService.getEventConfigById(widgetId);
-    if (page) {
-      if (this.type === 'Bottomsheet' && page.find(data => data.flowType === 'Bottomsheet')) {
-        this.getPageFromWidgetId(item, page);
-      }
-      if (this.type === 'Dialog' && page.find(data => data.flowType === 'Dialog')) {
-        this.replacePageEvent(item);
-      }
+    const events: IAngelEvent[] = this.appService.getEventConfigById(widgetId);
+    if (this.type === 'Bottomsheet') {
+      this.getPageFromWidgetId(item, events);
+    }
+    if (this.type === 'Dialog') {
+      this.replacePageEvent(item);
     }
   }
 
