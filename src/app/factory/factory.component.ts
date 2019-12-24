@@ -12,7 +12,8 @@ import {
   trigger,
   style,
   animate,
-  transition
+  transition,
+  sequence
 } from '@angular/animations';
 import { UltronConstant } from '../constant';
 declare var $: any;
@@ -25,11 +26,17 @@ declare var $: any;
     trigger('toggleMenu', [
       transition('void => *', [
         style({ transform: 'translateX(-100%)' }),
-        animate(300, style({ transform: 'translateX(0)' }))
+        sequence([
+          animate('0.3s', style({ transform: 'translateX(0)' })),
+          animate('0.4s ease-out', style({ transform: 'translateX(40%)' })),
+          animate('0.2s ease-in', style({ transform: 'translateX(0)' })),
+          animate('0.3s ease-out', style({ transform: 'translateX(20%)' })),
+          animate('0.2s ease-in', style({ transform: 'translateX(0)' }))
+        ])
       ]),
       // 动画时间可自行调整
       transition('* => void', [
-        animate(300, style({ transform: 'translateX(-100%)' }))
+        animate('0.3s ease-in', style({ transform: 'translateX(-100%)' }))
       ])
     ])
   ]
