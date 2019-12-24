@@ -242,15 +242,14 @@ export class FactoryComponent implements OnInit {
       eventConfig.flowType = flowType;
       eventConfig.widgetId = this.editWidgetId;
       eventConfig.targetPage = targetPageId;
-      // marshal 待改标记
-      currentEventConfigByIdcurrentEventConfig.some(data => {
+      !currentEventConfigByIdcurrentEventConfig.some(data => {
         if (this.editWidgetId === data.widgetId && flowType === data.flowType) {
           data.flowType = flowType;
           data.widgetId = this.editWidgetId;
           data.targetPage = targetPageId;
           return true;
         }
-      }) ? '' : currentEventConfigByIdcurrentEventConfig.push(eventConfig);
+      }) && currentEventConfigByIdcurrentEventConfig.push(eventConfig);
     } else {
       const eventConfig: IAngelEvent = {};
       eventConfig.flowType = flowType;
@@ -289,6 +288,5 @@ export class FactoryComponent implements OnInit {
     }
     const eventData: any = event.container.data[event.currentIndex];
     eventData.id = this.appService.generateWidgetId();
-    console.log(eventData.id);
   }
 }

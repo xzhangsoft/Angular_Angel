@@ -16,7 +16,7 @@
     </div>
     <div class="page-scrollable">
       <div *ngFor="let item of editingWidgets" class="px-4">
-        <ultron-dynamic-widgets-engine [item]="item" (engineEvents)="engineEvent($event)" from="flow"
+        <ultron-dynamic-widgets-engine [item]="item" from="flow"
           type="Bottomsheet">
         </ultron-dynamic-widgets-engine>
       </div>

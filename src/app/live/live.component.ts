@@ -51,10 +51,6 @@ export class LiveComponent implements OnInit {
   }
 
   engineEvent(event: { type: string; item: IAngelWidget }) {
-    const type = event.type;
-    if (type !== 'replacePage') {
-      return;
-    }
     this.enableBack = true;
     const triggerWidgetId = event.item.id;
     try {

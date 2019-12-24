@@ -62,10 +62,18 @@ export class PageComponent implements OnInit {
 
   exportMetadata() {
     this.appService.exportMetadata().subscribe((data) => {
-
-    });
-    this.modalContent = this.content.notifyCorrectExportResultModal;
-    $('#removeAllPageModal').modal('show');
+      this.modalContent = this.content.notifyCorrectExportResultModal;
+      setTimeout(() => {
+        $('#removeAllPageModal').modal('show');
+      });
+    },
+      error => {
+        this.modalContent = this.content.notifyFailedResultModal;
+        setTimeout(() => {
+          $('#removeAllPageModal').modal('show');
+        });
+      }
+    );
   }
 
   modalConfirm(val: any) {
