@@ -10,7 +10,9 @@ import { UltronConstant } from './constant';
   providedIn: 'root'
 })
 export class AppService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   content: any;
   getData(url = UltronConstant.ULTRON_METADATA_WIDGET_URL) {
@@ -93,6 +95,13 @@ export class AppService {
   exportMetadata(url = UltronConstant.ULTRON_METADATA_WIDGET_URL) {
     const pageMetadata = JSON.stringify(this.getPageMetadata());
     const eventMetadata = JSON.stringify(this.getEventConfig());
-    return this.http.post<any>('http://localhost:3000/savePage', { pageMetadata, eventMetadata});
+    return this.http.post<any>('http://localhost:3000/savePage', { pageMetadata, eventMetadata });
+  }
+
+  generateWidgetId() {
+    const widgetIdIndex = localStorage.getItem('widgetIdIndex') ? parseInt(localStorage.getItem('widgetIdIndex')) : 0;
+
+    localStorage.setItem('widgetIdIndex', (widgetIdIndex + 1).toString());
+    return widgetIdIndex + 1;
   }
 }

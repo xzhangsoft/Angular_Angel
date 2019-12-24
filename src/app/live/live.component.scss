@@ -11,7 +11,11 @@
         border-radius: 10px;
         background-color: white;
         box-shadow: 0 1px 5px 0 rgba(41, 85, 115, .21);
-
+        ::ng-deep .bottom-btn {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+        }
         .device-header {
             height: 60px;
         }

@@ -81,6 +81,7 @@ export class PageComponent implements OnInit {
   clearMetadata() {
     localStorage.removeItem('pageMetadata');
     localStorage.removeItem('eventMetadata');
+    localStorage.removeItem('widgetIdIndex');
     this.readyPages = _.get(this.appService.getPageMetadata(), 'angel');
     this.showEmpty = true;
   }

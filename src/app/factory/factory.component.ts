@@ -277,7 +277,6 @@ export class FactoryComponent implements OnInit {
       );
     } else {
       const lastContainerData = _.cloneDeep(event.previousContainer.data);
-      this.widgetIndex += 1;
       copyArrayItem(
         lastContainerData,
         event.container.data,
@@ -289,6 +288,7 @@ export class FactoryComponent implements OnInit {
       }
     }
     const eventData: any = event.container.data[event.currentIndex];
-    eventData.id = 'widget' + this.widgetIndex;
+    eventData.id = this.appService.generateWidgetId();
+    console.log(eventData.id);
   }
 }
